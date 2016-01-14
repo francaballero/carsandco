@@ -10,10 +10,10 @@
     <dependencies>
       <dependency>
         <groupId>org.camunda.bpm</groupId>
-        <artifactId>carscandco</artifactId>
-        <version>7.4.0</version>
+        <artifactId>camunda-bom</artifactId>
         <scope>import</scope>
         <type>pom</type>
+        <version>7.4.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
