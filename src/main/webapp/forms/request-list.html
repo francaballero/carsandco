@@ -7,7 +7,7 @@
 	     }
 	     else {
 	          var newdiv = document.createElement('div');
-	          newdiv.innerHTML = "<b>Item " + (counter+1) + "</b><hr>Name: <input class='form-control' cam-variable-type='String' cam-variable-name='name' name='name[]' />Price: <input class='form-control' cam-variable-type='Double' cam-variable-name='price' name='price[]' />Amount: <input class='form-control' cam-variable-type='Double' cam-variable-name='amount' name='amount[]' /><br><br>";
+	          newdiv.innerHTML = "<b>Item " + (counter+1) + "</b><hr>Name: <input class='form-control' cam-variable-type='String' cam-variable-name='name[]' name='name[]' />Price: <input class='form-control' cam-variable-type='Double' cam-variable-name='price[]' name='price[]' />Amount: <input class='form-control' cam-variable-type='Double' cam-variable-name='amount[]' name='amount[]' /><br><br>";
 	          document.getElementById(divName).appendChild(newdiv);
 	          counter++;
 	     }
@@ -17,9 +17,9 @@
 	<div id="dynamicInput">
 		<b>Item 1</b>
         <hr>
-		Name: <input class='form-control' cam-variable-type='String' cam-variable-name='name' name='name[]' />
-		Price: <input class='form-control' cam-variable-type='Double' cam-variable-name='price' name='price[]' />
-		Amount: <input class='form-control' cam-variable-type='Double' cam-variable-name='amount' name='amount[]' /><br><br>
+		Name: <input class='form-control' cam-variable-type='String' cam-variable-name='name[]' name='name[]' />
+		Price: <input class='form-control' cam-variable-type='Double' cam-variable-name='price[]' name='price[]' />
+		Amount: <input class='form-control' cam-variable-type='Double' cam-variable-name='amount[]' name='amount[]' /><br><br>
 	</div>
 	<input type="button" value="Add another item" onClick="addInput('dynamicInput');">
 </form>
