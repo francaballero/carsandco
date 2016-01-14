@@ -1,7 +1,1 @@
-/Users/davidkoch/git/carsandco/src/main/java/org/camunda/bpmn/cnc/ForwardInformation.java
-/Users/davidkoch/git/carsandco/src/main/java/org/camunda/bpmn/cnc/SendBill.java
-/Users/davidkoch/git/carsandco/src/main/java/org/camunda/bpmn/cnc/CheckPayment.java
-/Users/davidkoch/git/carsandco/src/main/java/org/camunda/bpmn/cnc/CreateBill.java
-/Users/davidkoch/git/carsandco/src/main/java/org/camunda/bpmn/cnc/SaveToDatabase.java
-/Users/davidkoch/git/carsandco/src/main/java/org/camunda/bpmn/cnc/ProcessTest.java
-/Users/davidkoch/git/carsandco/src/main/java/org/camunda/bpmn/cnc/ChooseStation.java
+/Users/davidkoch/Documents/workspace/cars_and_co_camunda_workflow/src/main/java/org/camunda/bpmn/cnc/ProcessTest.java

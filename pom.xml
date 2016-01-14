@@ -11,9 +11,9 @@
       <dependency>
         <groupId>org.camunda.bpm</groupId>
         <artifactId>camunda-bom</artifactId>
+        <version>7.4.0</version>
         <scope>import</scope>
         <type>pom</type>
-        <version>7.4.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
