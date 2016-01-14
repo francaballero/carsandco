@@ -1,4 +1,4 @@
-package org.camunda.bpmn.cnc;
+package carsandco.externalActions;
 
 public class ForwardInformation {
 
