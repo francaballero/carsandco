@@ -1,23 +1,25 @@
+<script language="Javascript" type="text/javascript">
+	var counter = 1;
+	var limit = 20;
+	function addInput(divName){
+	     if (counter == limit)  {
+	          alert("You have reached the limit of adding " + counter + " items");
+	     }
+	     else {
+	          var newdiv = document.createElement('div');
+	          newdiv.innerHTML = "<b>Item " + (counter+1) + "</b><hr>Name: <input class='form-control' cam-variable-type='String' cam-variable-name='name' name='name[]' />Price: <input class='form-control' cam-variable-type='Double' cam-variable-name='price' name='price[]' />Amount: <input class='form-control' cam-variable-type='Double' cam-variable-name='amount' name='amount[]' /><br><br>";
+	          document.getElementById(divName).appendChild(newdiv);
+	          counter++;
+	     }
+	}  
+</script>
 <form name="requestList">
-  <div class="form-group">
-    <label for="item_name">Item Name</label>
-    <input class="form-control"
-           cam-variable-type="String"
-           cam-variable-name="item_name"
-           name="item_name" />
-  </div>
-  <div class="form-group">
-    <label for="price">Price</label>
-    <input class="form-control"
-           cam-variable-type="Double"
-           cam-variable-name="price"
-           name="price" />
-  </div>
-  <div class="form-group">
-    <label for="amount">Amount</label>
-    <input class="form-control"
-           cam-variable-type="Double"
-           cam-variable-name="amount"
-           name="amount" />
-  </div>
+	<div id="dynamicInput">
+		<b>Item 1</b>
+        <hr>
+		Name: <input class='form-control' cam-variable-type='String' cam-variable-name='name' name='name[]' />
+		Price: <input class='form-control' cam-variable-type='Double' cam-variable-name='price' name='price[]' />
+		Amount: <input class='form-control' cam-variable-type='Double' cam-variable-name='amount' name='amount[]' /><br><br>
+	</div>
+	<input type="button" value="Add another item" onClick="addInput('dynamicInput');">
 </form>
