@@ -1,4 +1,4 @@
-package carsandco.externalActions;
+package carsandco.management;
 
 public class ForwardInformation {
 

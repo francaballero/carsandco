@@ -1,4 +1,4 @@
-package carsandco.internalInteractions;
+package carsandco.headquarter;
 
 import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.application.impl.ServletProcessApplication;

@@ -1,1 +1,7 @@
-org/camunda/bpmn/cnc/ProcessTest.class
+carsandco\internalInteractions\CreateBill.class
+carsandco\internalInteractions\ChooseStation.class
+carsandco\externalActions\ForwardInformation.class
+carsandco\externalActions\SendBill.class
+carsandco\internalInteractions\ProcessApplicationClass.class
+carsandco\internalInteractions\CheckPayment.class
+carsandco\internalInteractions\SaveToDatabase.class
