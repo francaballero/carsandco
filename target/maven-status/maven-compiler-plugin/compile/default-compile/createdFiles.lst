@@ -1,1 +1,7 @@
+org/camunda/bpmn/cnc/CreateBill.class
 org/camunda/bpmn/cnc/ProcessTest.class
+org/camunda/bpmn/cnc/ForwardInformation.class
+org/camunda/bpmn/cnc/CheckPayment.class
+org/camunda/bpmn/cnc/SendBill.class
+org/camunda/bpmn/cnc/ChooseStation.class
+org/camunda/bpmn/cnc/SaveToDatabase.class
