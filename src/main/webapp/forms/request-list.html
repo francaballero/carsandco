@@ -1,25 +1,98 @@
-<script language="Javascript" type="text/javascript">
-	var counter = 1;
-	var limit = 20;
-	function addInput(divName){
-	     if (counter == limit)  {
-	          alert("You have reached the limit of adding " + counter + " items");
-	     }
-	     else {
-	          var newdiv = document.createElement('div');
-	          newdiv.innerHTML = "<b>Item " + (counter+1) + "</b><hr>Name: <input class='form-control' cam-variable-type='String' cam-variable-name='name[]' name='name[]' />Price: <input class='form-control' cam-variable-type='Double' cam-variable-name='price[]' name='price[]' />Amount: <input class='form-control' cam-variable-type='Double' cam-variable-name='amount[]' name='amount[]' /><br><br>";
-	          document.getElementById(divName).appendChild(newdiv);
-	          counter++;
-	     }
-	}  
-</script>
-<form name="requestList">
-	<div id="dynamicInput">
-		<b>Item 1</b>
-        <hr>
-		Name: <input class='form-control' cam-variable-type='String' cam-variable-name='name[]' name='name[]' />
-		Price: <input class='form-control' cam-variable-type='Double' cam-variable-name='price[]' name='price[]' />
-		Amount: <input class='form-control' cam-variable-type='Double' cam-variable-name='amount[]' name='amount[]' /><br><br>
-	</div>
-	<input type="button" value="Add another item" onClick="addInput('dynamicInput');">
+<form name="listForm" role="form">
+
+  <script cam-script type="text/form-script">
+
+    // angular form works on scope object
+    var workList = $scope.workList = {
+      items : []
+    };
+
+	// First item
+	workList.items.push({});	
+
+    // scope function which adds a new item
+    $scope.addItem = function() {
+      workList.items.push({});
+    };
+
+    /**
+     * cam form lifecycle hooks
+    */
+
+    camForm.on('form-loaded', function() {
+
+      // declare variable 'workList' incuding metadata for serialization
+      camForm.variableManager.createVariable({
+        name: 'workList',
+        type: 'Object',
+        value: workList,
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'org.camunda.bpm.getstarted.loanapproval.WorkList'
+        }
+      });
+
+    });
+
+    camForm.on('submit', function() {
+      // remove '$$hashKey' properties from item objects
+      angular.forEach(workList.items, function(item) {
+        delete item.$$hashKey;
+      });
+    });
+
+  </script>
+
+
+  <div>
+      <h4">Items</h4>
+
+    <div ng-repeat="item in workList.items">
+      <hr>
+      <div class="control-group">
+        <label class="control-label" for="name">Name</label>
+        <div class="controls">
+          <input id="name"
+                 class="form-control"
+                 type="text"
+                 required
+                 ng-model="item.name">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="price">Price</label>
+        <div class="controls">
+          <input id="zip"
+                 class="form-control"
+                 type="number"
+                 required
+                 value = '0'
+                 ng-model="item.price">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="amount">Amount</label>
+        <div class="controls">
+          <input id="city"
+                 class="form-control"
+                 type="number"
+                 required
+                 value = '0'
+                 ng-model="item.amount">
+        </div>
+      </div>
+      <br>
+      <div class="control-group">
+        <label class="control-label" for="subtotal">Subtotal: </label>
+          <span ng-if="!(item.price&&item.amount)">0 €</span>
+          <span ng-if="item.price&&item.amount">{{item.price*item.amount}} €</span>
+      </div>
+    </div>
+    <hr>
+    <a href
+         ng-click="addItem()"
+         class="btn btn-default"">Add item</a>     
+  </div>
 </form>

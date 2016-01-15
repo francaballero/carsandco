@@ -60,7 +60,6 @@
           <signavio:signavioMetaData metaKey="bgcolor" metaValue="" />
         </extensionElements>
         <flowNodeRef>ReceiveTask_04yrmti</flowNodeRef>
-        <flowNodeRef>sid-46163A1B-0341-458D-9EB3-ABC4167EDB9E</flowNodeRef>
         <flowNodeRef>ServiceTask_0my7518</flowNodeRef>
       </lane>
     </laneSet>
@@ -165,8 +164,6 @@
     <sequenceFlow id="SequenceFlow_0wsaclc" sourceRef="sid-FDDD879B-F61D-4051-AC00-5B0B657EBF94" targetRef="sid-65F3C584-10EC-4561-958C-FE231E6B5D1D" />
     <sequenceFlow id="SequenceFlow_1xc08w1" sourceRef="sid-EEC2B149-41E1-4C8F-887B-557D870AEB7E" targetRef="sid-F20E9CA5-3E30-414B-BEA9-217E0FFE3B08" />
     <sequenceFlow id="SequenceFlow_1lto70g" sourceRef="sid-65F3C584-10EC-4561-958C-FE231E6B5D1D" targetRef="sid-EEC2B149-41E1-4C8F-887B-557D870AEB7E" />
-    <sequenceFlow id="SequenceFlow_1g1q1zy" sourceRef="ReceiveTask_04yrmti" targetRef="sid-46163A1B-0341-458D-9EB3-ABC4167EDB9E" />
-    <sequenceFlow id="SequenceFlow_1i6ictq" sourceRef="sid-46163A1B-0341-458D-9EB3-ABC4167EDB9E" targetRef="ServiceTask_0my7518" />
     <sequenceFlow id="SequenceFlow_10qf0xd" sourceRef="sid-F20E9CA5-3E30-414B-BEA9-217E0FFE3B08" targetRef="ServiceTask_0gtprjm" />
     <sequenceFlow id="SequenceFlow_1qzj5i2" sourceRef="ServiceTask_0gtprjm" targetRef="sid-5FE31D01-FCA1-40DA-9A64-5DCB0B0697CB" />
     <sequenceFlow id="SequenceFlow_14yeb5c" sourceRef="sid-FDDD879B-F61D-4051-AC00-5B0B657EBF94" targetRef="sid-65F3C584-10EC-4561-958C-FE231E6B5D1D" />
@@ -207,7 +204,7 @@
     </sendTask>
     <receiveTask id="ReceiveTask_04yrmti" name="Reveive contract information and repair/ maintain" messageRef="sid-9ea7c11f-ca55-4796-9714-2cea35f04af4">
       <incoming>SequenceFlow_0ng7gba</incoming>
-      <outgoing>SequenceFlow_1g1q1zy</outgoing>
+      <outgoing>SequenceFlow_1ey7io8</outgoing>
     </receiveTask>
     <sequenceFlow id="SequenceFlow_1hbpn6m" sourceRef="IntermediateCatchEvent_17x8o26" targetRef="sid-3A147B1E-A4D1-42C2-A9BE-A11DAAE2C265" />
     <dataObjectReference id="sid-FCE7FA4B-9DD1-402F-87F5-86D2C3AA6791" name="Contract" dataObjectRef="sid-1ddb1c6f-9e41-4815-8c8a-3076c19863e4">
@@ -216,42 +213,13 @@
       </extensionElements>
     </dataObjectReference>
     <dataObject id="sid-1ddb1c6f-9e41-4815-8c8a-3076c19863e4" name="Contract" />
-    <userTask id="sid-46163A1B-0341-458D-9EB3-ABC4167EDB9E" name="Create list of performed  works" implementation="##WebService" camunda:formKey="embedded:app:forms/request-list.html" camunda:assignee="John Doe" camunda:candidateGroups="Mechanic">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
-        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
-        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
-      </extensionElements>
-      <incoming>SequenceFlow_1g1q1zy</incoming>
-      <outgoing>SequenceFlow_1i6ictq</outgoing>
-      <ioSpecification id="sid-869a65a5-eb0d-4413-9770-427a5b8a95cc">
-        <dataOutput id="sid-8a2587c3-d4af-43bd-a08a-e07f54a2ed7e" />
-        <inputSet id="sid-d489ecb4-2ff7-48ca-8418-9dd7194f5ce0" name="DefaultInputSet">
-          <outputSetRefs>sid-0a87acf4-c18a-4507-b4d5-7381ca52eeef</outputSetRefs>
-          <outputSetRefs>sid-0a87acf4-c18a-4507-b4d5-7381ca52eeef</outputSetRefs>
-          <outputSetRefs>sid-0a87acf4-c18a-4507-b4d5-7381ca52eeef</outputSetRefs>
-        </inputSet>
-        <outputSet id="sid-0a87acf4-c18a-4507-b4d5-7381ca52eeef" name="DefaultOutputSet">
-          <dataOutputRefs>sid-8a2587c3-d4af-43bd-a08a-e07f54a2ed7e</dataOutputRefs>
-          <inputSetRefs>sid-d489ecb4-2ff7-48ca-8418-9dd7194f5ce0</inputSetRefs>
-          <inputSetRefs>sid-d489ecb4-2ff7-48ca-8418-9dd7194f5ce0</inputSetRefs>
-          <inputSetRefs>sid-d489ecb4-2ff7-48ca-8418-9dd7194f5ce0</inputSetRefs>
-        </outputSet>
-      </ioSpecification>
+    <serviceTask id="ServiceTask_0my7518" name="Process list and inform management" camunda:class="carsandco.garage.ProcessWorkList">
+      <incoming>SequenceFlow_1ey7io8</incoming>
+      <outgoing>sid-35FE5633-D398-4697-97A3-F35722851ED4</outgoing>
       <dataOutputAssociation id="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007">
         <sourceRef>sid-8a2587c3-d4af-43bd-a08a-e07f54a2ed7e</sourceRef>
         <targetRef>sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0</targetRef>
       </dataOutputAssociation>
-    </userTask>
-    <dataObjectReference id="sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0" name="List of performed work" dataObjectRef="sid-280f7f71-6f31-41e0-a131-c603e36b4e2e">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-      </extensionElements>
-    </dataObjectReference>
-    <dataObject id="sid-280f7f71-6f31-41e0-a131-c603e36b4e2e" name="List of performed works" />
-    <serviceTask id="ServiceTask_0my7518" name="Process list and inform management" camunda:class="carsandco.garage.ProcessWorkList">
-      <incoming>SequenceFlow_1i6ictq</incoming>
-      <outgoing>sid-35FE5633-D398-4697-97A3-F35722851ED4</outgoing>
     </serviceTask>
     <intermediateCatchEvent id="sid-FDDD879B-F61D-4051-AC00-5B0B657EBF94" name="New billing job pops up">
       <extensionElements>
@@ -359,6 +327,13 @@
       </extensionElements>
       <incoming>SequenceFlow_1qzj5i2</incoming>
     </endEvent>
+    <sequenceFlow id="SequenceFlow_1ey7io8" sourceRef="ReceiveTask_04yrmti" targetRef="ServiceTask_0my7518" />
+    <dataObjectReference id="sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0" name="List of performed work" dataObjectRef="sid-280f7f71-6f31-41e0-a131-c603e36b4e2e">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+      </extensionElements>
+    </dataObjectReference>
+    <dataObject id="sid-280f7f71-6f31-41e0-a131-c603e36b4e2e" name="List of performed works" />
   </process>
   <bpmndi:BPMNDiagram id="sid-c2e92e51-1dc9-4342-9217-2a9f1ee2e96c">
     <bpmndi:BPMNPlane id="sid-da403c90-0b00-471e-99bc-5ecc217a3a57" bpmnElement="sid-19cfeb0f-f215-4ff6-bce8-ee1caf443f8a">
@@ -458,12 +433,6 @@
           <omgdc:Bounds x="319.48572" y="555" width="91.028564" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="sid-46163A1B-0341-458D-9EB3-ABC4167EDB9E_gui" bpmnElement="sid-46163A1B-0341-458D-9EB3-ABC4167EDB9E">
-        <omgdc:Bounds x="986" y="1218" width="100" height="80" />
-        <bpmndi:BPMNLabel labelStyle="sid-706153d7-efd9-4446-8b3c-2395b4692c71">
-          <omgdc:Bounds x="2413.2856" y="1229" width="69.42857" height="36" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="sid-FCE7FA4B-9DD1-402F-87F5-86D2C3AA6791_gui" bpmnElement="sid-FCE7FA4B-9DD1-402F-87F5-86D2C3AA6791">
         <omgdc:Bounds x="813" y="769" width="58" height="73" />
         <bpmndi:BPMNLabel labelStyle="sid-706153d7-efd9-4446-8b3c-2395b4692c71">
@@ -489,9 +458,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0_gui" bpmnElement="sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0">
-        <omgdc:Bounds x="1000" y="1084" width="72" height="86" />
+        <omgdc:Bounds x="1184" y="1087" width="72" height="86" />
         <bpmndi:BPMNLabel labelStyle="sid-706153d7-efd9-4446-8b3c-2395b4692c71">
-          <omgdc:Bounds x="991" y="1112" width="90" height="36" />
+          <omgdc:Bounds x="1175" y="1115" width="90" height="36" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="sid-0BAC063F-6483-43D1-8934-818E176D7322_gui" bpmnElement="sid-0BAC063F-6483-43D1-8934-818E176D7322">
@@ -513,10 +482,6 @@
       <bpmndi:BPMNEdge id="sid-34E91D51-8A75-4389-B6DA-89656CA09CC2_gui" bpmnElement="sid-34E91D51-8A75-4389-B6DA-89656CA09CC2">
         <omgdi:waypoint xsi:type="omgdc:Point" x="842" y="842" />
         <omgdi:waypoint xsi:type="omgdc:Point" x="842" y="888" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007_gui" bpmnElement="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="1064" y="1218" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="1064" y="1170" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="sid-35FE5633-D398-4697-97A3-F35722851ED4_gui" bpmnElement="sid-35FE5633-D398-4697-97A3-F35722851ED4">
         <omgdi:waypoint xsi:type="omgdc:Point" x="1270" y="1258" />
@@ -599,20 +564,6 @@
           <omgdc:Bounds x="1581.5" y="918" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1g1q1zy_di" bpmnElement="SequenceFlow_1g1q1zy">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="892" y="1258" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="986" y="1258" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1061" y="1248" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1i6ictq_di" bpmnElement="SequenceFlow_1i6ictq">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="1086" y="1258" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="1170" y="1258" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1221" y="1252.5" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_10qf0xd_di" bpmnElement="SequenceFlow_10qf0xd">
         <omgdi:waypoint xsi:type="omgdc:Point" x="1750" y="928" />
         <omgdi:waypoint xsi:type="omgdc:Point" x="1817" y="928" />
@@ -669,6 +620,17 @@
       <bpmndi:BPMNShape id="ServiceTask_0my7518_di" bpmnElement="ServiceTask_0my7518">
         <omgdc:Bounds x="1170" y="1218" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007_gui" bpmnElement="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1233" y="1218" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1231" y="1173" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ey7io8_di" bpmnElement="SequenceFlow_1ey7io8">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="892" y="1258" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1170" y="1258" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="986" y="1248" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="sid-d52f2fb2-c007-4720-acc9-431d793fbd3f">
       <omgdc:Font name="Arial" size="11" />
