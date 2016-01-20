@@ -17,28 +17,28 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/")
+@Path("/contract")
 public class ReceiveContract {
 
 		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 		RuntimeService runtimeService = processEngine.getRuntimeService();
 
 		@POST
-		@Path("/newcontract")
+		@Path("/new")
 		@Consumes(MediaType.APPLICATION_JSON)
-		public Response crunchifyREST(InputStream incomingData) {
-			StringBuilder crunchifyBuilder = new StringBuilder();
+		public Response incomingContractHandler(InputStream incomingData) {
+			StringBuilder builder = new StringBuilder();
 			try {
 				BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
 				String line = null;
 				while ((line = in.readLine()) != null) {
-					crunchifyBuilder.append(line);
+					builder.append(line);
 				}
 				Map<String,Object> map = new HashMap<String,Object>();
-				map.put("contract", crunchifyBuilder.toString());
+				map.put("contract", builder.toString());
 				ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", map);
 				
-				System.out.println("Data Received: " + crunchifyBuilder.toString());
+				System.out.println("Data Received: " + builder.toString());
 				System.out.println("Process ID: " + processInstance.getId());
 				
 			} catch (Exception e) {
@@ -46,6 +46,6 @@ public class ReceiveContract {
 			}
 			
 			// return HTTP response 200 in case of success
-			return Response.status(200).entity(crunchifyBuilder.toString()).build();
+			return Response.status(200).entity(builder.toString()).build();
 		}
 }
