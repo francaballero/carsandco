@@ -1,4 +1,4 @@
-package carsandco.garage;
+package carsandco.tools;
 
 public class Item {
 	protected String name;
@@ -43,7 +43,11 @@ public class Item {
 
 	  @Override
 	  public String toString() {
-	    return "item [name=" + name + ", price=" + price + ", amount=" + amount + ", subtotal=" + getSubtotal() + "]";
+	    return "\n    Name: " + name + ""
+	    		+ "\n    Price: " + price + "€"
+	    		+ "\n    Amount: " + amount
+	    		+ "\n    Subtotal: " + getSubtotal() + "€"
+	    		+ "\n\n    ------\n";
 	  }
 
 }

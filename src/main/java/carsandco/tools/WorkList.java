@@ -1,4 +1,4 @@
-package carsandco.garage;
+package carsandco.tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,17 @@ public class WorkList {
 
 	  @Override
 	  public String toString() {
-	    return "Work List [items=" + items + " total=" + getTotal() + "]";
+		  String items_out = "";
+		  for(Item item: items) {
+			  items_out += item.toString();
+		  }
+		  
+		  return "\n********************************************\n"
+	    		+ "  WORK LIST\n\n"
+	    		+ "    ------\n"
+	    		+ items_out
+	    		+ "\n Total: " + getTotal() + "€\n"
+	    		+ "********************************************\n\n";
 	  }
 
 }

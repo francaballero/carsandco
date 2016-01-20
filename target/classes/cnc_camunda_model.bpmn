@@ -61,6 +61,7 @@
         </extensionElements>
         <flowNodeRef>ReceiveTask_04yrmti</flowNodeRef>
         <flowNodeRef>ServiceTask_0my7518</flowNodeRef>
+        <flowNodeRef>ServiceTask_1s8yu4z</flowNodeRef>
       </lane>
     </laneSet>
     <startEvent id="sid-8F3FE48B-11C0-455A-8C56-B41614246A3B" name="Incoming contract">
@@ -204,7 +205,7 @@
     </sendTask>
     <receiveTask id="ReceiveTask_04yrmti" name="Reveive contract information and repair/ maintain" messageRef="sid-9ea7c11f-ca55-4796-9714-2cea35f04af4">
       <incoming>SequenceFlow_0ng7gba</incoming>
-      <outgoing>SequenceFlow_1ey7io8</outgoing>
+      <outgoing>SequenceFlow_1g1q1zy</outgoing>
     </receiveTask>
     <sequenceFlow id="SequenceFlow_1hbpn6m" sourceRef="IntermediateCatchEvent_17x8o26" targetRef="sid-3A147B1E-A4D1-42C2-A9BE-A11DAAE2C265" />
     <dataObjectReference id="sid-FCE7FA4B-9DD1-402F-87F5-86D2C3AA6791" name="Contract" dataObjectRef="sid-1ddb1c6f-9e41-4815-8c8a-3076c19863e4">
@@ -214,12 +215,8 @@
     </dataObjectReference>
     <dataObject id="sid-1ddb1c6f-9e41-4815-8c8a-3076c19863e4" name="Contract" />
     <serviceTask id="ServiceTask_0my7518" name="Process list and inform management" camunda:class="carsandco.garage.ProcessWorkList">
-      <incoming>SequenceFlow_1ey7io8</incoming>
+      <incoming>SequenceFlow_1i6ictq</incoming>
       <outgoing>sid-35FE5633-D398-4697-97A3-F35722851ED4</outgoing>
-      <dataOutputAssociation id="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007">
-        <sourceRef>sid-8a2587c3-d4af-43bd-a08a-e07f54a2ed7e</sourceRef>
-        <targetRef>sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0</targetRef>
-      </dataOutputAssociation>
     </serviceTask>
     <intermediateCatchEvent id="sid-FDDD879B-F61D-4051-AC00-5B0B657EBF94" name="New billing job pops up">
       <extensionElements>
@@ -327,13 +324,22 @@
       </extensionElements>
       <incoming>SequenceFlow_1qzj5i2</incoming>
     </endEvent>
-    <sequenceFlow id="SequenceFlow_1ey7io8" sourceRef="ReceiveTask_04yrmti" targetRef="ServiceTask_0my7518" />
     <dataObjectReference id="sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0" name="List of performed work" dataObjectRef="sid-280f7f71-6f31-41e0-a131-c603e36b4e2e">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
       </extensionElements>
     </dataObjectReference>
     <dataObject id="sid-280f7f71-6f31-41e0-a131-c603e36b4e2e" name="List of performed works" />
+    <sequenceFlow id="SequenceFlow_1i6ictq" sourceRef="ServiceTask_1s8yu4z" targetRef="ServiceTask_0my7518" />
+    <sequenceFlow id="SequenceFlow_1g1q1zy" sourceRef="ReceiveTask_04yrmti" targetRef="ServiceTask_1s8yu4z" />
+    <serviceTask id="ServiceTask_1s8yu4z" name="Create list of performed  works" camunda:class="CreateWorkList">
+      <incoming>SequenceFlow_1g1q1zy</incoming>
+      <outgoing>SequenceFlow_1i6ictq</outgoing>
+      <dataOutputAssociation id="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007">
+        <sourceRef>sid-8a2587c3-d4af-43bd-a08a-e07f54a2ed7e</sourceRef>
+        <targetRef>sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
   </process>
   <bpmndi:BPMNDiagram id="sid-c2e92e51-1dc9-4342-9217-2a9f1ee2e96c">
     <bpmndi:BPMNPlane id="sid-da403c90-0b00-471e-99bc-5ecc217a3a57" bpmnElement="sid-19cfeb0f-f215-4ff6-bce8-ee1caf443f8a">
@@ -458,9 +464,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0_gui" bpmnElement="sid-B8955E23-1E5F-4065-8D74-5C9CFCA464D0">
-        <omgdc:Bounds x="1184" y="1087" width="72" height="86" />
+        <omgdc:Bounds x="1000" y="1084" width="72" height="86" />
         <bpmndi:BPMNLabel labelStyle="sid-706153d7-efd9-4446-8b3c-2395b4692c71">
-          <omgdc:Bounds x="1175" y="1115" width="90" height="36" />
+          <omgdc:Bounds x="991" y="1112" width="90" height="36" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="sid-0BAC063F-6483-43D1-8934-818E176D7322_gui" bpmnElement="sid-0BAC063F-6483-43D1-8934-818E176D7322">
@@ -621,16 +627,26 @@
         <omgdc:Bounds x="1170" y="1218" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007_gui" bpmnElement="sid-CAF57085-F35A-44EA-9AD7-AD2516F85007">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="1233" y="1218" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="1231" y="1173" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1064" y="1218" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1064" y="1170" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1ey7io8_di" bpmnElement="SequenceFlow_1ey7io8">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="892" y="1258" />
+      <bpmndi:BPMNEdge id="SequenceFlow_1i6ictq_di" bpmnElement="SequenceFlow_1i6ictq">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1086" y="1258" />
         <omgdi:waypoint xsi:type="omgdc:Point" x="1170" y="1258" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="986" y="1248" width="90" height="20" />
+          <omgdc:Bounds x="1221" y="1252.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1g1q1zy_di" bpmnElement="SequenceFlow_1g1q1zy">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="892" y="1258" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="986" y="1258" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1061" y="1248" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1s8yu4z_di" bpmnElement="ServiceTask_1s8yu4z">
+        <omgdc:Bounds x="986" y="1218" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="sid-d52f2fb2-c007-4720-acc9-431d793fbd3f">
       <omgdc:Font name="Arial" size="11" />
