@@ -21,9 +21,14 @@ public class ChooseStation implements JavaDelegate {
 				+ "Calculating the closest 'Cars&Co' station...");
 		
 		Pair<Integer, String> station = GoogleMaps.getClosestStation(origin);
+		String googleMapsLink = "https://www.google.com/maps/dir/" + origin + "/" + station.getValue();
+		execution.setVariable("googleMapsLink", googleMapsLink);
 		
 		System.out.println("\nThe closest station to '" + origin + "' is: '" + station.getValue() + "'."
-				+ "In a distance of: " + station.getKey()/1000.00 +"km.\n\n\n");
+				+ "In a distance of: " + station.getKey()/1000.00 +"km.\n\n"
+				+ googleMapsLink + "/\n\n\n");
+		
+	
 	    
 	}
 

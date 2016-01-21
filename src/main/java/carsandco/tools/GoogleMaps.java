@@ -51,7 +51,7 @@ public class GoogleMaps {
 	}
 	
 	
-	public static JSONObject getGoogleMapJSON(String origin, String destination) throws IOException, JSONException {
+	private static JSONObject getGoogleMapJSON(String origin, String destination) throws IOException, JSONException {
 		String line, outputString = "";
 		URL url = new URL("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origin+"&destinations="+destination);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -64,7 +64,7 @@ public class GoogleMaps {
 		return new JSONObject (outputString);
 	}
 	
-	public static int getDistance (String origin, String destination) throws IOException, JSONException {
+	private static int getDistance (String origin, String destination) throws IOException, JSONException {
 		//We read the GoogleMap JSON output to return the distance in meters
 		JSONObject json = getGoogleMapJSON (origin, destination);
 		JSONArray rows = json.getJSONArray("rows");
