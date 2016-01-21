@@ -34,6 +34,8 @@ public class ReceiveContract {
 				while ((line = in.readLine()) != null) {
 					builder.append(line);
 				}
+				
+				//TODO: Convert JSON to RepairContract Object
 				Map<String,Object> map = new HashMap<String,Object>();
 				map.put("contract", builder.toString());
 				ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", map);

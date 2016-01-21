@@ -18,16 +18,28 @@ public class SendBill implements JavaDelegate{
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		// TODO Auto-generated method stub
+		
+		RepairContract contract = (RepairContract) execution.getVariable("contract");
 		InvoiceRequest invoice = (InvoiceRequest) execution.getVariable("invoice");
+
 		Gson gson = new Gson();
 		String newInvoice = gson.toJson(invoice);
 		System.out.println("Final JSON-Invoice to send:");
 		System.out.println(newInvoice);
 		
+		//TODO: Decide who to send the invoice depending on the customer ID from the contract (read database)
+		String customerID = "";
+		URL url;
+		if(customerID == "BVIS-ID"){
+			url = new URL("BVIS-Invoice-Endpoint")
+		}
+		if(customerID == "Capitol-ID"){
+			url = new URL(Urls.URL_ACCIDENT_INVOICE);
+		}
+		
 		try {
-			//url = "http://camunda-capitol.iwvi.uni-koblenz.de:8080/rest-api/accident/invoice/"
-			URL url = new URL(Urls.URL_ACCIDENT_INVOICE);
+			
+			
 			URLConnection connection = url.openConnection();
 			connection.setDoOutput(true);
 			connection.setRequestProperty("Content-Type", "application/json");
