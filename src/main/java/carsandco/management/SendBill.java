@@ -8,17 +8,19 @@ import java.net.URLConnection;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
-import de.uniko.digicom.capitol.api.Urls;
+import carsandco.tools.MongoClass;
 import de.uniko.digicom.capitol.api.accident.InvoiceRequest;
+import de.uniko.digicom.capitol.api.client.AccidentApiClient;
+import de.uniko.digicom.carsandco.messages.RepairContract;
 
-public class SendBill implements JavaDelegate{
+public class SendBill implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		
 		RepairContract contract = (RepairContract) execution.getVariable("contract");
 		InvoiceRequest invoice = (InvoiceRequest) execution.getVariable("invoice");
 
@@ -27,38 +29,45 @@ public class SendBill implements JavaDelegate{
 		System.out.println("Final JSON-Invoice to send:");
 		System.out.println(newInvoice);
 		
-		//TODO: Decide who to send the invoice depending on the customer ID from the contract (read database)
-		String customerID = "";
-		URL url;
-		if(customerID == "BVIS-ID"){
-			url = new URL("BVIS-Invoice-Endpoint")
+		String customerID = Integer.toString(contract.getCustomerID());
+		
+		JSONObject capitol = new JSONObject(MongoClass.getJSON("customers", "name", "Capitol"));
+		JSONObject bvis = new JSONObject(MongoClass.getJSON("customers", "name", "BVIS"));
+		
+		if (customerID.equals(capitol.getString("id"))) {
+			AccidentApiClient capitol_api = new AccidentApiClient();
+			capitol_api.continueAccident(invoice);
 		}
-		if(customerID == "Capitol-ID"){
-			url = new URL(Urls.URL_ACCIDENT_INVOICE);
+
+		if (customerID.equals(bvis.getString("id"))) {
+			//TODO Update BVIS URL to send invoice
+			URL url = new URL("BVIS-Invoice-Endpoint");
+			try {
+				URLConnection connection = url.openConnection();
+				connection.setDoOutput(true);
+				connection.setRequestProperty("Content-Type", "application/json");
+				connection.setConnectTimeout(5000);
+				connection.setReadTimeout(5000);
+				OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+				out.write(newInvoice);
+				out.close();
+
+				BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+				while (in.readLine() != null) {
+				}
+				System.out.println("REST Service Invoked Successfully..");
+				in.close();
+			} catch (Exception e) {
+				System.out.println("Error while calling REST Service");
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Error sending invoice " + invoice.getPurpose() 
+								+ " with Transaction Key " + invoice.getTransactionKey() 
+								+ ". No URL/Debtor could be found.");
 		}
 		
-		try {
-			
-			
-			URLConnection connection = url.openConnection();
-			connection.setDoOutput(true);
-			connection.setRequestProperty("Content-Type", "application/json");
-			connection.setConnectTimeout(5000);
-			connection.setReadTimeout(5000);
-			OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-			out.write(newInvoice);
-			out.close();
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-			while (in.readLine() != null) {
-			}
-			System.out.println("REST Service Invoked Successfully..");
-			in.close();
-		} catch (Exception e) {
-			System.out.println("Error while calling REST Service");
-			System.out.println(e);
-		}
 	}
 
 }

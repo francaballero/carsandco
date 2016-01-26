@@ -24,6 +24,11 @@
 			<id>capitol</id>
 			<url>http://camunda-capitol.iwvi.uni-koblenz.de/mvn</url>
 		</repository>
+		<!-- Cars and Co Inc. repository -->
+		<repository>
+			<id>carsandco</id>
+			<url>http://camunda-carsandco.iwvi.uni-koblenz.de/mvn</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -89,29 +94,37 @@
 			<artifactId>capitol-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
 		<dependency>
-    		<groupId>org.json</groupId>
-    		<artifactId>json</artifactId>
-    		<version>20090211</version>
+			<groupId>de.uniko.digicom.carsandco</groupId>
+			<artifactId>carsandco-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>1.7.1</version>
 		</dependency>
-		
-	<dependency>
-        <groupId>org.mongodb</groupId>
-        <artifactId>mongo-java-driver</artifactId>
-        <version>2.13.3</version>
-    </dependency>
-    
-    <dependency>
-        <groupId>org.mongodb</groupId>
-        <artifactId>bson</artifactId>
-        <version>2.13.3</version>
-    </dependency>
-		
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.13.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>bson</artifactId>
+			<version>2.13.3</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

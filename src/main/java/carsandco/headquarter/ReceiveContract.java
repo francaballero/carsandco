@@ -5,6 +5,10 @@ import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
+import com.google.gson.Gson;
+
+import de.uniko.digicom.carsandco.messages.RepairContract;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,27 +31,34 @@ public class ReceiveContract {
 		@Path("/new")
 		@Consumes(MediaType.APPLICATION_JSON)
 		public Response incomingContractHandler(InputStream incomingData) {
-			StringBuilder builder = new StringBuilder();
+			String contractJson = "";
+			//StringBuilder builder = new StringBuilder();
 			try {
-				BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
-				String line = null;
+				BufferedReader input = new BufferedReader(new InputStreamReader(incomingData));
+				/*String line = null;
 				while ((line = in.readLine()) != null) {
 					builder.append(line);
 				}
+				String contractJson = builder.toString();*/
 				
-				//TODO: Convert JSON to RepairContract Object
+				Gson gson = new Gson();
+				RepairContract newContract = gson.fromJson(input, RepairContract.class);
+				contractJson = gson.toJson(newContract);
+				
 				Map<String,Object> map = new HashMap<String,Object>();
-				map.put("contract", builder.toString());
+				map.put("contract", newContract);
+				
 				ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", map);
 				
-				System.out.println("Data Received: " + builder.toString());
-				System.out.println("Process ID: " + processInstance.getId());
+				System.out.println("New contract data received: \n" + contractJson);
+				System.out.println("Process startet with ID: " + processInstance.getId());
 				
 			} catch (Exception e) {
-				System.out.println("Error Parsing: - ");
+				System.out.println("Error Parsing new Contract: - ");
+				e.printStackTrace();
 			}
 			
 			// return HTTP response 200 in case of success
-			return Response.status(200).entity(builder.toString()).build();
+			return Response.status(200).entity(contractJson).build();
 		}
 }
