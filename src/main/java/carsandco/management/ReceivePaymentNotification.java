@@ -22,7 +22,6 @@ import com.google.gson.Gson;
 
 import carsandco.tools.MongoClass;
 import de.uniko.digicom.carsandco.messages.PaymentNotification;
-import de.uniko.digicom.carsandco.messages.RepairContract;
 
 @Path("/contract")
 public class ReceivePaymentNotification {
@@ -54,6 +53,7 @@ public class ReceivePaymentNotification {
 			String processID = transaction.getString("processID");
 			
 			//TODO How to continue camunda processes by intermediate message event
+			runtimeService.messageEventReceived("contract", processID);
 			//ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", map);
 			
 			System.out.println("Payment Notification received:");
