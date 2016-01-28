@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,8 +18,9 @@ import carsandco.headquarter.Stations;
 
 public class GoogleMaps {
 	
-	public static Pair<Integer, String> getClosestStation(String origin) {
-		List<String> stations = Stations.getStations();
+	//This function return the closest Cars&Co station from a origin city and the distance.
+	public static Pair<Integer, String> getClosestStation(String origin) throws UnknownHostException, JSONException {
+		List<String> stations = getStations();
 		List<Pair<Integer,String>> distances = new ArrayList<Pair<Integer,String>>();
 		int distance;
 		
@@ -50,7 +51,21 @@ public class GoogleMaps {
 		return distances.get(0);
 	}
 	
+	//This function returns a List with all the stations loaded from the DB.
+	private static List<String> getStations() throws UnknownHostException, JSONException {
+		JSONObject stationsJsonObject = MongoClass.getJSON("stations", "id", "1");
+		JSONArray stationsJsonArray = stationsJsonObject.getJSONArray("stations");
+				
+		List<String> stationsArray = new ArrayList<String>();
+				
+		for(int i=0; i<stationsJsonArray.length(); i++) {
+			stationsArray.add(stationsJsonArray.getString(i));
+		}
+				
+		return stationsArray;
+	}
 	
+	//This function returns a GoogleMap JsonObject with information between two cities.
 	private static JSONObject getGoogleMapJSON(String origin, String destination) throws IOException, JSONException {
 		String line, outputString = "";
 		URL url = new URL("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+origin+"&destinations="+destination);
@@ -64,6 +79,7 @@ public class GoogleMaps {
 		return new JSONObject (outputString);
 	}
 	
+	//This function returns the distance (in meters) between two cities.
 	private static int getDistance (String origin, String destination) throws IOException, JSONException {
 		//We read the GoogleMap JSON output to return the distance in meters
 		JSONObject json = getGoogleMapJSON (origin, destination);

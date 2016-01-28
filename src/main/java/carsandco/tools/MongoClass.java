@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.UnknownHostException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -41,10 +43,10 @@ public class MongoClass {
     	mongoClient.close();
 	}
 	
-	public static String getJSON(String collection,String key, String value)
-			throws UnknownHostException {
+	public static JSONObject getJSON(String collection,String key, String value)
+			throws UnknownHostException, JSONException {
 		
-		String json = new String();
+		String json = new String("");
 		MongoClient MongoClient = new MongoClient(); 
     	DB db = MongoClient.getDB("mydb");    	
     	DBCollection coll = db.getCollection(collection);    	
@@ -52,15 +54,15 @@ public class MongoClass {
     	DBCursor cursor = coll.find(query);
 
     	try {
-    	   while(cursor.hasNext()) {
-    	       json.concat(cursor.next().toString()+"\n");
-    	   }
-    	} finally {
-    	   cursor.close();
-    	}
+     	   while(cursor.hasNext()) {
+     	       json += cursor.next().toString()+"\n";
+     	   }
+     	} finally {
+     	   cursor.close();
+     	}
+     	
+ 		return new JSONObject(json);
+ 		
+ 	}
 		
-		return json;
-		
-	}
-
 }
