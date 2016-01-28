@@ -17,7 +17,7 @@ import de.uniko.digicom.capitol.api.accident.InvoiceRequest;
 import de.uniko.digicom.capitol.api.client.AccidentApiClient;
 import de.uniko.digicom.carsandco.messages.RepairContract;
 
-public class SendBill implements JavaDelegate {
+public class SendInvoice implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {

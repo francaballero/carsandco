@@ -2,6 +2,9 @@ package carsandco.headquarter;
 
 import java.net.UnknownHostException;
 
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.json.JSONException;
@@ -28,6 +31,15 @@ public class ChooseStation implements JavaDelegate {
 		System.out.println("The closest station to '" + origin + "' is: '" + station.getValue() + "'."
 				+ "\nIn a distance of: " + station.getKey()/1000.00 +"km.\n\n"
 				+ googleMapsLink + "/\n\n\n");
+	
+		//ACTIVATE INTERMEDIATE MESSAGE EVENT OF STATION MANAGEMENT
+		System.out.println("Redirecting contract information to service station...");
+		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+		RuntimeService runtimeService = processEngine.getRuntimeService();
+		runtimeService.correlateMessage("confirm");
+		System.out.println("Confirm-Intermediate Event should be triggered.");
 	}
+	
+	
 
 }

@@ -15,7 +15,6 @@ import javax.ws.rs.core.Response;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
@@ -49,16 +48,17 @@ public class ReceivePaymentNotification {
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("paymentNotification", paymentNote);
 			
-			JSONObject transaction = MongoClass.getJSON("transactions", "transactionkey", paymentNote.getTransactionKey());
-			String processID = transaction.getString("processID");
+			
+			//JSONObject transaction = MongoClass.getJSON("transactions", "transactionkey", paymentNote.getTransactionKey());
+			//String processID = transaction.getString("processID");
 			
 			//TODO How to continue camunda processes by intermediate message event
-			runtimeService.messageEventReceived("contract", processID);
-			//ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", map);
+			//runtimeService.messageEventReceived("contract", processID);
+			runtimeService.correlateMessage("payment", paymentNote.getTransactionKey(), map);
 			
 			System.out.println("Payment Notification received:");
 			System.out.println(paymentNoteJson);
-			System.out.println("Continuing process with ID: " + processID);
+			//System.out.println("Continuing process with ID: " + processID);
 			
 		} catch (Exception e) {
 			System.out.println("Error Parsing Payment Notification: - ");

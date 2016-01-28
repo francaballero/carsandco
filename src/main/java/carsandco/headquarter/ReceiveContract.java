@@ -48,7 +48,7 @@ public class ReceiveContract {
 				Map<String,Object> map = new HashMap<String,Object>();
 				map.put("contract", newContract);
 				
-				ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", map);
+				ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", newContract.getTransactionKey(), map);
 				
 				System.out.println("New contract data received: \n" + contractJson);
 				System.out.println("Process startet with ID: " + processInstance.getId());

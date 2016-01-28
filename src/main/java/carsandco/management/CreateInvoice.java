@@ -9,7 +9,7 @@ import carsandco.tools.WorkList;
 import de.uniko.digicom.capitol.api.accident.InvoiceRequest;
 import de.uniko.digicom.carsandco.messages.RepairContract;
 
-public class CreateBill implements JavaDelegate {
+public class CreateInvoice implements JavaDelegate {
 
 	protected String IBAN = "DE12500105170648489890";
 	protected String BIC = "PBNKDEFF";
