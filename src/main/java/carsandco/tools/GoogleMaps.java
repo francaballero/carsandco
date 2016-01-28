@@ -21,6 +21,7 @@ public class GoogleMaps {
 		List<String> stations = getStations();
 		List<Pair<Integer,String>> distances = new ArrayList<Pair<Integer,String>>();
 		int distance;
+		boolean exception = false;
 		
 		//We calculate the distances from the origin to all the stations 
 		for (String station : stations) {
@@ -28,8 +29,14 @@ public class GoogleMaps {
 				distance = getDistance(origin, station);
 			} catch (Exception e) {
 				distance = Integer.MAX_VALUE;
+				exception = true;
 			}
 			distances.add(new Pair<Integer, String>(distance, station));
+		}
+		
+		if (exception) {
+			System.out.println("Error calculating the closest service station.");
+	    	System.out.println("Contract handeled by headquarter in Amsterdam.\n");
 		}
 		
 		//We sort the List by distances
@@ -56,7 +63,7 @@ public class GoogleMaps {
 				
 		List<String> stationsArray = new ArrayList<String>();
 				
-		for(int i=0; i<stationsJsonArray.length(); i++) {
+		for(int i = 0; i < stationsJsonArray.length(); i++) {
 			stationsArray.add(stationsJsonArray.getString(i));
 		}
 				
