@@ -31,8 +31,8 @@ public class SendBill implements JavaDelegate {
 		
 		String customerID = Integer.toString(contract.getCustomerID());
 		
-		JSONObject capitol = new JSONObject(MongoClass.getJSON("customers", "name", "Capitol"));
-		JSONObject bvis = new JSONObject(MongoClass.getJSON("customers", "name", "BVIS"));
+		JSONObject capitol = MongoClass.getJSON("customers", "name", "Capitol");
+		JSONObject bvis = MongoClass.getJSON("customers", "name", "BVIS");
 		
 		if (customerID.equals(capitol.getString("id"))) {
 			AccidentApiClient capitol_api = new AccidentApiClient();

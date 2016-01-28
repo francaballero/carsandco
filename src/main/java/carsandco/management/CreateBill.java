@@ -26,12 +26,10 @@ public class CreateBill implements JavaDelegate {
 			invoice.setAmount(list.getTotal());
 			invoice.setDetailedRepairInformation(list.toString());
 
-			JSONObject transaction = new JSONObject(
-					MongoClass.getJSON("transactions", "transactionkey", contract.getTransactionKey()));
+			JSONObject transaction = MongoClass.getJSON("transactions", "transactionkey", contract.getTransactionKey());
 			invoice.setPurpose(transaction.getString("contractID"));
 
-			JSONObject debtor = new JSONObject(
-					MongoClass.getJSON("customers", "id", Integer.toString(contract.getCustomerID())));
+			JSONObject debtor = MongoClass.getJSON("customers", "id", Integer.toString(contract.getCustomerID()));
 			invoice.setDebtor(debtor.getString("name"));
 
 			execution.setVariable("invoice", invoice);

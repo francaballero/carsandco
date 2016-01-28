@@ -49,7 +49,7 @@ public class ReceivePaymentNotification {
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("paymentNotification", paymentNote);
 			
-			JSONObject transaction = new JSONObject(MongoClass.getJSON("transactions", "transactionkey", paymentNote.getTransactionKey()));
+			JSONObject transaction = MongoClass.getJSON("transactions", "transactionkey", paymentNote.getTransactionKey());
 			String processID = transaction.getString("processID");
 			
 			//TODO How to continue camunda processes by intermediate message event

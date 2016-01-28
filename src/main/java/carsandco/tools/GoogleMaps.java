@@ -14,8 +14,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import carsandco.headquarter.Stations;
-
 public class GoogleMaps {
 	
 	//This function return the closest Cars&Co station from a origin city and the distance.
