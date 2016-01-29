@@ -29,7 +29,7 @@ public class CreateInvoice implements JavaDelegate {
 			JSONObject transaction = MongoClass.getJSON("transactions", "transactionkey", contract.getTransactionKey());
 			invoice.setPurpose(transaction.getString("contractID"));
 
-			JSONObject debtor = MongoClass.getJSON("customers", "id", Integer.toString(contract.getCustomerID()));
+			JSONObject debtor = MongoClass.getJSON("customers", "id", contract.getCustomerID());
 			invoice.setDebtor(debtor.getString("name"));
 
 			execution.setVariable("invoice", invoice);

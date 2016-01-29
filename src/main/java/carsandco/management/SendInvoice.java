@@ -29,7 +29,7 @@ public class SendInvoice implements JavaDelegate {
 		System.out.println("Final JSON-Invoice to send:");
 		System.out.println(newInvoice);
 		
-		String customerID = Integer.toString(contract.getCustomerID());
+		String customerID = contract.getCustomerID();
 		
 		JSONObject capitol = MongoClass.getJSON("customers", "name", "Capitol");
 		JSONObject bvis = MongoClass.getJSON("customers", "name", "BVIS");
