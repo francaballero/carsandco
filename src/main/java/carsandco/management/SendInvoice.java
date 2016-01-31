@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 
 import carsandco.tools.MongoClass;
+import de.uniko.digicom.capitol.api.RestResponse;
 import de.uniko.digicom.capitol.api.accident.InvoiceRequest;
 import de.uniko.digicom.capitol.api.client.AccidentApiClient;
 import de.uniko.digicom.carsandco.messages.RepairContract;
@@ -21,26 +22,28 @@ public class SendInvoice implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
+//Get current process variables
 		RepairContract contract = (RepairContract) execution.getVariable("contract");
 		InvoiceRequest invoice = (InvoiceRequest) execution.getVariable("invoice");
-
+//Convert invoice to JSON String
 		Gson gson = new Gson();
 		String newInvoice = gson.toJson(invoice);
-		System.out.println("Final JSON-Invoice to send:");
-		System.out.println(newInvoice);
 		
-		String customerID = contract.getCustomerID();
-		
+//Compare customerIDs to find out who to send the invoice
+		String customerID = contract.getCustomerID();		
 		JSONObject capitol = MongoClass.getJSON("customers", "name", "Capitol");
 		JSONObject bvis = MongoClass.getJSON("customers", "name", "BVIS");
-		
-		if (customerID.equals(capitol.getString("id"))) {
+		//Case Capitol
+		RestResponse response = null;
+		if (customerID.equals(capitol.getString("_id"))) {
+			System.out.println("Sending InvoiceRequest to Capitol Inc. ...");
 			AccidentApiClient capitol_api = new AccidentApiClient();
-			capitol_api.continueAccident(invoice);
+			response = capitol_api.continueAccident(invoice);
 		}
-
-		if (customerID.equals(bvis.getString("id"))) {
+		//Case BVIS
+		if (customerID.equals(bvis.getString("_id"))) {
 			//TODO Update BVIS URL to send invoice
+			System.out.println("Sending InvoiceRequest to BVIS Inc. ...");
 			URL url = new URL("BVIS-Invoice-Endpoint");
 			try {
 				URLConnection connection = url.openConnection();
@@ -56,17 +59,17 @@ public class SendInvoice implements JavaDelegate {
 
 				while (in.readLine() != null) {
 				}
-				System.out.println("REST Service Invoked Successfully..");
 				in.close();
 			} catch (Exception e) {
-				System.out.println("Error while calling REST Service");
+				System.err.println("Error while calling REST Service");
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("Error sending invoice " + invoice.getPurpose() 
+			System.err.println("Error sending invoice " + invoice.getPurpose() 
 								+ " with Transaction Key " + invoice.getTransactionKey() 
 								+ ". No URL/Debtor could be found.");
 		}
+		System.out.println(response.getMessage());
 		
 	}
 

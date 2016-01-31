@@ -33,11 +33,13 @@ public class ChooseStation implements JavaDelegate {
 				+ googleMapsLink + "/\n\n\n");
 	
 		//ACTIVATE INTERMEDIATE MESSAGE EVENT OF STATION MANAGEMENT
-		System.out.println("Redirecting contract information to service station...");
+		System.out.println("Redirecting contract information to service station...");	
 		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 		RuntimeService runtimeService = processEngine.getRuntimeService();
-		runtimeService.correlateMessage("confirm");
-		System.out.println("Confirm-Intermediate Event should be triggered.");
+		runtimeService.createMessageCorrelation("payment")
+		.processInstanceBusinessKey(execution.getBusinessKey()).correlate();
+//		runtimeService.correlateMessage("confirm");
+		System.out.println("Confirm-intermediate catch event got triggered.");
 	}
 	
 	

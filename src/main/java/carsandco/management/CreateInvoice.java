@@ -1,8 +1,13 @@
 package carsandco.management;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.json.JSONObject;
+
+import com.google.gson.Gson;
 
 import carsandco.tools.MongoClass;
 import carsandco.tools.WorkList;
@@ -20,27 +25,27 @@ public class CreateInvoice implements JavaDelegate {
 		RepairContract contract = (RepairContract) execution.getVariable("contract");
 		WorkList list = (WorkList) execution.getVariable("workList");
 		try {
+//Create InvoiceRequest and fill data
 			InvoiceRequest invoice = new InvoiceRequest(contract.getTransactionKey());
 			invoice.setBic(BIC);
 			invoice.setIban(IBAN);
 			invoice.setAmount(list.getTotal());
 			invoice.setDetailedRepairInformation(list.toString());
-
-			JSONObject transaction = MongoClass.getJSON("transactions", "transactionkey", contract.getTransactionKey());
-			invoice.setPurpose(transaction.getString("contractID"));
-
-			JSONObject debtor = MongoClass.getJSON("customers", "id", contract.getCustomerID());
+			invoice.setPurpose((String)execution.getVariable("contractID"));
+//Get debtor name from customerID with database query
+			JSONObject debtor = MongoClass.getJSON("customers", "customerID", contract.getCustomerID());
 			invoice.setDebtor(debtor.getString("name"));
-
+//Set process variable
 			execution.setVariable("invoice", invoice);
-
-			// TODO Save invoice in database (invoice-collection or add to contract?)
-
-			System.out.println(
-					"Invoice over " + list.getTotal() + "Euro with transaction key " + contract.getTransactionKey()
-							+ " and debtor " + debtor.getString("name") + " successfully created.");
+//Save invoice to database
+			String invoiceJson = new Gson().toJson(invoice, InvoiceRequest.class);
+			InputStream invoiceInput = new ByteArrayInputStream(invoiceJson.getBytes("UTF-8"));
+			String invoiceID = MongoClass.insertJSON("invoices", invoiceInput);
+			execution.setVariable("invoiceID", invoiceID);
+			 
+			System.out.println("Invoice successfully created: \n" + invoiceJson );
 		} catch (Exception e) {
-			System.out.println("Error creating a new invoice with transaction key " + contract.getTransactionKey()
+			System.err.println("Error creating a new invoice with transaction key " + contract.getTransactionKey()
 					+ " and debtor " + contract.getCustomerID());
 			e.printStackTrace();
 		}

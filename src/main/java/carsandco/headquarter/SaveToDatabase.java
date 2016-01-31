@@ -1,16 +1,25 @@
 package carsandco.headquarter;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
+import com.google.gson.Gson;
+
+import carsandco.tools.MongoClass;
+import de.uniko.digicom.carsandco.messages.RepairContract;
+
 public class SaveToDatabase implements JavaDelegate {
 
-	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		//TODO Save contract to contracts-collection (DB)
-		//TODO Extract transaction key and customerID from contract (RepairContract.java class)
-		//TODO Save transaction key, customerID, contractID and current processID into the tansactions-collection (DB)
 
+//Save contract to database and add the contractID to the process variables
+		RepairContract contract = (RepairContract) execution.getVariable("contract");
+		InputStream contractInput = new ByteArrayInputStream(new Gson().toJson(contract, RepairContract.class).getBytes("UTF-8"));
+		String contractID = MongoClass.insertJSON("invoices", contractInput);
+		execution.setVariable("contractID", contractID);
 		
 	}
 	

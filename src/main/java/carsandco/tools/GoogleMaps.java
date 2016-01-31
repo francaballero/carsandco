@@ -35,7 +35,7 @@ public class GoogleMaps {
 		}
 		
 		if (exception) {
-			System.out.println("Error calculating the closest service station.");
+			System.err.println("Error calculating the closest service station.");
 	    	System.out.println("Contract handeled by headquarter in Amsterdam.\n");
 		}
 		
