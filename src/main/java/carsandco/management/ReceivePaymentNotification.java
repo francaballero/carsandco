@@ -15,6 +15,7 @@ import org.camunda.bpm.engine.RuntimeService;
 
 import com.google.gson.Gson;
 
+import carsandco.tools.JsonHandler;
 import de.uniko.digicom.carsandco.messages.PaymentNotification;
 
 @Path("/payment")
@@ -29,16 +30,15 @@ public class ReceivePaymentNotification {
 		try {
 //Receive POST data (PaymentNotification)
 			BufferedReader input = new BufferedReader(new InputStreamReader(incomingData));
-			Gson gson = new Gson();
-			PaymentNotification paymentNote = gson.fromJson(input, PaymentNotification.class);
-			paymentNoteJson = gson.toJson(paymentNote);
+			PaymentNotification paymentNote = new Gson().fromJson(input, PaymentNotification.class);
+			paymentNoteJson = JsonHandler.toJson(paymentNote);
 			
 			System.out.println("Payment Notification received:");
 			System.out.println(paymentNoteJson);
 //Continue camunda execution			
 			runtimeService.createMessageCorrelation("payment")
 			.processInstanceBusinessKey(paymentNote.getTransactionKey())
-			.setVariable("paymentNotification", paymentNote).correlate();
+			.setVariable("paymentNotification", paymentNoteJson).correlate();
 			System.out.println("Process with business key: " + paymentNote.getTransactionKey() + " continued.");
 			
 			

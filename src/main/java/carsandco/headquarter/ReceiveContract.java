@@ -39,7 +39,7 @@ public class ReceiveContract {
 				contractJson = gson.toJson(newContract);
 				
 				Map<String,Object> map = new HashMap<String,Object>();
-				map.put("contract", newContract);
+				map.put("contract", contractJson);
 				System.out.println("New RepairContract received: \n" + contractJson);
 //Start camunda process with contract process variable				
 				ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", newContract.getTransactionKey(), map);

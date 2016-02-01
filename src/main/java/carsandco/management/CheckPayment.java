@@ -3,6 +3,7 @@ package carsandco.management;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
+import carsandco.tools.JsonHandler;
 import carsandco.tools.MongoClass;
 import de.uniko.digicom.carsandco.messages.PaymentNotification;
 
@@ -10,7 +11,8 @@ public class CheckPayment implements JavaDelegate {
 	//TODO: Maybe external payment process due to triggering and currency issues of waiting message event?
 	
 	public void execute(DelegateExecution execution) throws Exception {
-		PaymentNotification paymentNote = (PaymentNotification) execution.getVariable("paymentNote");
+		String paymentNoteJson = (String) execution.getVariable("paymentNote");
+		PaymentNotification paymentNote = JsonHandler.toObject(paymentNoteJson, PaymentNotification.class);
 		String contractID = (String) execution.getVariable("contractID");
 		String invoiceID = (String) execution.getVariable("invoiceID");
 

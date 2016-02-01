@@ -10,6 +10,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.json.JSONException;
 
 import carsandco.tools.GoogleMaps;
+import carsandco.tools.JsonHandler;
 import carsandco.tools.Pair;
 import de.uniko.digicom.carsandco.messages.RepairContract;
 
@@ -17,7 +18,8 @@ import de.uniko.digicom.carsandco.messages.RepairContract;
 public class ChooseStation implements JavaDelegate {
 
 	public void execute(DelegateExecution execution) throws UnknownHostException, JSONException {
-		RepairContract contract = (RepairContract) execution.getVariable("contract");
+		String contractJson = (String) execution.getVariable("contract");
+		RepairContract contract = JsonHandler.toObject(contractJson, RepairContract.class);
 		
 	    String origin =  contract.getCarLocationCity();
 	    

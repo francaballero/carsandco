@@ -7,8 +7,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-
+import carsandco.tools.JsonHandler;
 import carsandco.tools.MongoClass;
 import carsandco.tools.WorkList;
 import de.uniko.digicom.capitol.api.accident.InvoiceRequest;
@@ -22,7 +21,8 @@ public class CreateInvoice implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 
-		RepairContract contract = (RepairContract) execution.getVariable("contract");
+		String contractJson = (String) execution.getVariable("contract");
+		RepairContract contract = JsonHandler.toObject(contractJson, RepairContract.class);
 		WorkList list = (WorkList) execution.getVariable("workList");
 		try {
 //Create InvoiceRequest and fill data
@@ -36,9 +36,9 @@ public class CreateInvoice implements JavaDelegate {
 			JSONObject debtor = MongoClass.getJSON("customers", "customerID", contract.getCustomerID());
 			invoice.setDebtor(debtor.getString("name"));
 //Set process variable
-			execution.setVariable("invoice", invoice);
-//Save invoice to database
-			String invoiceJson = new Gson().toJson(invoice, InvoiceRequest.class);
+			String invoiceJson =JsonHandler.toJson(invoice);
+			execution.setVariable("invoice", invoiceJson);
+//Save invoice to database		
 			InputStream invoiceInput = new ByteArrayInputStream(invoiceJson.getBytes("UTF-8"));
 			String invoiceID = MongoClass.insertJSON("invoices", invoiceInput);
 			execution.setVariable("invoiceID", invoiceID);

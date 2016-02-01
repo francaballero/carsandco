@@ -1,639 +1,595 @@
-<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="9.5.1" expressionLanguage="http://www.w3.org/TR/XPath" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
-   <message id="Message_1loekon" name="contract"/>
-   <message id="Message_1nfejid" name="conf"/>
-   <message id="Message_0bhlyzu" name="i"/>
-   <message id="Message_0lvxkej" name="confirm"/>
-   <message id="Message_1k2p4f2" name="payment"/>
-   <collaboration id="sid-b7f268ab-9aeb-44fc-b4d6-e477fba2c1b0">
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:signavio="http://www.signavio.com" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" expressionLanguage="http://www.w3.org/TR/XPath" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="9.5.1" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  <message id="Message_1loekon" name="contract" />
+  <message id="Message_1nfejid" name="conf" />
+  <message id="Message_0bhlyzu" name="i" />
+  <message id="Message_0lvxkej" name="confirm" />
+  <message id="Message_1k2p4f2" name="payment" />
+  <collaboration id="sid-b7f268ab-9aeb-44fc-b4d6-e477fba2c1b0">
+    <extensionElements>
+      <signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="64605c9b32e44c35a1f118de14f25aaf" />
+    </extensionElements>
+    <participant id="CarsandcoPool" name="Cars and Co" processRef="CarsAndCoProcess">
       <extensionElements>
-         <signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="64605c9b32e44c35a1f118de14f25aaf"/>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
       </extensionElements>
-      <participant id="CarsandcoPool" name="Cars and Co" processRef="CarsAndCoProcess">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-         </extensionElements>
-      </participant>
-      <participant id="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" name="BVIS">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-         </extensionElements>
-      </participant>
-      <participant id="sid-E2097639-94BD-4C5A-805B-892B799F53B4" name="Capitol">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-         </extensionElements>
-      </participant>
-      <messageFlow id="sid-D70034FE-D2AA-4E50-9CFF-31B81464F4AD" name="" sourceRef="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" targetRef="StartEvent"/>
-      <messageFlow id="sid-E0C861EA-1195-46AE-A016-1C2E2BEF807E" name="" sourceRef="sid-E2097639-94BD-4C5A-805B-892B799F53B4" targetRef="StartEvent"/>
-      <messageFlow id="sid-7CD03FC4-11AC-4A3C-B227-DBF29A5403FC" name="" sourceRef="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" targetRef="ReceivePayment"/>
-      <messageFlow id="sid-D9500239-D683-482B-A389-A4A584A2D87F" name="" sourceRef="SendInvoice" targetRef="sid-E2097639-94BD-4C5A-805B-892B799F53B4"/>
-      <messageFlow id="sid-D6DBE11A-D38A-4F64-A750-0175B4AE51F9" name="" sourceRef="sid-E2097639-94BD-4C5A-805B-892B799F53B4" targetRef="ReceivePayment"/>
-      <messageFlow id="sid-29672964-0ACE-49CE-9D6E-BE9B0A50AE52" name="" sourceRef="SendInvoice" targetRef="sid-52B46558-F9CA-42D7-B308-4EEF650982B3"/>
-   </collaboration>
-   <process id="CarsAndCoProcess" isClosed="false" isExecutable="true" name="Cars and Co" processType="None">
-      <extensionElements/>
-      <laneSet id="sid-c1fddc28-7472-4412-b342-6daf445d3d39">
-         <lane id="Lane_0jn0fc3" name="Headquarter">
-            <extensionElements>
-               <signavio:signavioMetaData metaKey="bgcolor" metaValue=""/>
-            </extensionElements>
-            <flowNodeRef>StartEvent</flowNodeRef>
-            <flowNodeRef>ReceiveTask</flowNodeRef>
-            <flowNodeRef>SaveContract</flowNodeRef>
-            <flowNodeRef>ChooseStation</flowNodeRef>
-         </lane>
-         <lane id="Lane_17u4vum" name="Station Management">
-            <extensionElements>
-               <signavio:signavioMetaData metaKey="bgcolor" metaValue=""/>
-            </extensionElements>
-            <flowNodeRef>ConfirmContract</flowNodeRef>
-            <flowNodeRef>ConfirmContractUserTask</flowNodeRef>
-            <flowNodeRef>CreateInvoice</flowNodeRef>
-            <flowNodeRef>SendInvoice</flowNodeRef>
-            <flowNodeRef>ReceivePayment</flowNodeRef>
-            <flowNodeRef>CheckPayment</flowNodeRef>
-            <flowNodeRef>EndEvent_1a8b14q</flowNodeRef>
-         </lane>
-         <lane id="Lane_1n5k2vh" name="Station garage">
-            <extensionElements>
-               <signavio:signavioMetaData metaKey="bgcolor" metaValue=""/>
-            </extensionElements>
-            <flowNodeRef>RepairCar</flowNodeRef>
-            <flowNodeRef>CreateWorklist</flowNodeRef>
-            <flowNodeRef>ProcessList</flowNodeRef>
-         </lane>
-      </laneSet>
-      <dataObject id="sid-ec5257a8-3606-47cd-9f4e-c16f1644d3aa" isCollection="false" name="contract"/>
-      <dataObject id="sid-474eba02-00dc-4b24-8163-bbacd1e57451" isCollection="false" name="List of performed work"/>
-      <dataObject id="sid-ad7baaac-ea51-4fbb-946d-33aaa184670f" isCollection="false" name="Invoice"/>
-      <dataObject id="sid-56df2c42-dc85-4823-b0dc-857d9cd67654" isCollection="false" name="Payment Notification"/>
-      <startEvent id="StartEvent" isInterrupting="false" name="Incoming contract">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-            <signavio:signavioMetaData metaKey="vorgngerprozesse" metaValue="[]"/>
-            <signavio:signavioMetaData metaKey="viaitsystem" metaValue=""/>
-         </extensionElements>
-         <outgoing>SequenceFlow_1kewt8s</outgoing>
-         <messageEventDefinition id="sid-3c47a662-fd09-45b9-9c19-27e4a48110d0" messageRef="Message_1loekon"/>
-      </startEvent>
-      <receiveTask completionQuantity="1" id="ReceiveTask" implementation="##unspecified" instantiate="false" isForCompensation="false" messageRef="Message_1loekon" name="Receive new incoming contract" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_1kewt8s</incoming>
-         <outgoing>SequenceFlow_17feuoq</outgoing>
-      </receiveTask>
-      <serviceTask camunda:class="carsandco.headquarter.SaveToDatabase" completionQuantity="1" id="SaveContract" implementation="##unspecified" isForCompensation="false" name="Save contract to database" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_17feuoq</incoming>
-         <outgoing>SequenceFlow_1l57bsq</outgoing>
-         <ioSpecification id="sid-9971d300-8455-4c45-a9de-038a435f6114">
-            <dataInput id="sid-da524761-7359-48ec-972d-c130cfa4f4ec"/>
-            <inputSet id="sid-4b3704c4-d69a-4e35-9fea-ae8682636dab" name="DefaultInputSet">
-               <dataInputRefs>sid-da524761-7359-48ec-972d-c130cfa4f4ec</dataInputRefs>
-               <outputSetRefs>sid-04f61ac6-2878-4539-b391-c6c6c4701bb0</outputSetRefs>
-            </inputSet>
-            <outputSet id="sid-04f61ac6-2878-4539-b391-c6c6c4701bb0" name="DefaultOutputSet">
-               <inputSetRefs>sid-4b3704c4-d69a-4e35-9fea-ae8682636dab</inputSetRefs>
-            </outputSet>
-         </ioSpecification>
-         <dataInputAssociation id="DataInputAssociation_1el7pfv">
-            <sourceRef>Contract</sourceRef>
-            <targetRef>sid-da524761-7359-48ec-972d-c130cfa4f4ec</targetRef>
-         </dataInputAssociation>
-      </serviceTask>
-      <serviceTask camunda:class="carsandco.headquarter.ChooseStation" completionQuantity="1" id="ChooseStation" implementation="##unspecified" isForCompensation="false" name="Choose service station and redirect contract" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_1l57bsq</incoming>
-         <outgoing>SequenceFlow_1r7j2a0</outgoing>
-      </serviceTask>
-      <intermediateCatchEvent id="ConfirmContract" name="Contract Notification">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-            <signavio:signavioMetaData metaKey="viaitsystem" metaValue=""/>
-         </extensionElements>
-         <incoming>SequenceFlow_1r7j2a0</incoming>
-         <outgoing>SequenceFlow_1mmlauk</outgoing>
-         <messageEventDefinition id="sid-5af4de29-b70c-420f-b354-c3f7a61a8992" messageRef="Message_0lvxkej"/>
-      </intermediateCatchEvent>
-      <userTask camunda:candidateGroups="Management" completionQuantity="1" id="ConfirmContractUserTask" implementation="##unspecified" isForCompensation="false" name="Check contract information" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_1mmlauk</incoming>
-         <outgoing>sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D</outgoing>
-         <ioSpecification id="sid-eeb91b56-0572-4a23-ad41-70279f6c5f34">
-            <dataInput id="sid-499e40bb-7d82-4025-a4b1-10510d53a291"/>
-            <inputSet id="sid-fd3e9470-ea54-4742-91ac-a16ad08f5836" name="DefaultInputSet">
-               <dataInputRefs>sid-499e40bb-7d82-4025-a4b1-10510d53a291</dataInputRefs>
-               <outputSetRefs>sid-12885599-0441-4aa4-904e-38f313dd57f6</outputSetRefs>
-            </inputSet>
-            <outputSet id="sid-12885599-0441-4aa4-904e-38f313dd57f6" name="DefaultOutputSet">
-               <inputSetRefs>sid-fd3e9470-ea54-4742-91ac-a16ad08f5836</inputSetRefs>
-            </outputSet>
-         </ioSpecification>
-         <dataInputAssociation id="DataInputAssociation_09x87l4">
-            <sourceRef>DataObjectReference_1ndvyjq</sourceRef>
-            <targetRef>sid-499e40bb-7d82-4025-a4b1-10510d53a291</targetRef>
-         </dataInputAssociation>
-      </userTask>
-      <serviceTask camunda:class="carsandco.management.CreateInvoice" completionQuantity="1" id="CreateInvoice" implementation="##unspecified" isForCompensation="false" name="Create invoice and save to database" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_0s28k2s</incoming>
-         <outgoing>SequenceFlow_079jgz5</outgoing>
-         <ioSpecification id="sid-4f57c136-ca32-41d3-8785-a0a9293f7a0e">
-            <dataOutput id="sid-bcfe855c-0202-4ce5-b899-ea798dce8a51"/>
-            <inputSet id="sid-5a8b3a85-a861-44c2-a936-5c746679c29a" name="DefaultInputSet">
-               <outputSetRefs>sid-784c9d21-aad9-415c-950c-09c4a7c40890</outputSetRefs>
-            </inputSet>
-            <outputSet id="sid-784c9d21-aad9-415c-950c-09c4a7c40890" name="DefaultOutputSet">
-               <dataOutputRefs>sid-bcfe855c-0202-4ce5-b899-ea798dce8a51</dataOutputRefs>
-               <inputSetRefs>sid-5a8b3a85-a861-44c2-a936-5c746679c29a</inputSetRefs>
-            </outputSet>
-         </ioSpecification>
-         <dataOutputAssociation id="DataOutputAssociation_1r8lkbp">
-            <sourceRef>sid-bcfe855c-0202-4ce5-b899-ea798dce8a51</sourceRef>
-            <targetRef>DataObjectReference_11583d0</targetRef>
-         </dataOutputAssociation>
-      </serviceTask>
-      <sendTask camunda:class="carsandco.management.SendInvoice" completionQuantity="1" id="SendInvoice" implementation="##unspecified" isForCompensation="false" name="Send invoice to contract parter" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_079jgz5</incoming>
-         <outgoing>SequenceFlow_06q37ev</outgoing>
-         <ioSpecification id="sid-74b23a4c-6c94-4550-b4bb-580657aa9685">
-            <dataInput id="sid-699fa703-2e1f-48be-a6e7-c17664ba7e45"/>
-            <inputSet id="sid-0f4d4119-9cea-436f-882d-45cc764c8877" name="DefaultInputSet">
-               <dataInputRefs>sid-699fa703-2e1f-48be-a6e7-c17664ba7e45</dataInputRefs>
-               <outputSetRefs>sid-6edba83d-4dad-4da3-aaaa-5c5659a6420e</outputSetRefs>
-            </inputSet>
-            <outputSet id="sid-6edba83d-4dad-4da3-aaaa-5c5659a6420e" name="DefaultOutputSet">
-               <inputSetRefs>sid-0f4d4119-9cea-436f-882d-45cc764c8877</inputSetRefs>
-            </outputSet>
-         </ioSpecification>
-         <dataInputAssociation id="DataInputAssociation_01rvq1m">
-            <sourceRef>DataObjectReference_11583d0</sourceRef>
-            <targetRef>sid-699fa703-2e1f-48be-a6e7-c17664ba7e45</targetRef>
-         </dataInputAssociation>
-      </sendTask>
-      <intermediateCatchEvent id="ReceivePayment" name="Incoming Payment Notification">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-            <signavio:signavioMetaData metaKey="viaitsystem" metaValue=""/>
-         </extensionElements>
-         <incoming>SequenceFlow_06q37ev</incoming>
-         <outgoing>SequenceFlow_0yt3w5f</outgoing>
-         <messageEventDefinition id="sid-059a1646-dc35-48f6-899e-d1f2f62c4b65" messageRef="Message_1k2p4f2"/>
-      </intermediateCatchEvent>
-      <serviceTask camunda:class="carsandco.management.CheckPayment" completionQuantity="1" id="CheckPayment" implementation="##unspecified" isForCompensation="false" name="Process payment notification" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_0yt3w5f</incoming>
-         <outgoing>SequenceFlow_1k2gckd</outgoing>
-         <ioSpecification id="sid-d03e739e-acaa-486e-b3ae-7d2419dcc067">
-            <dataInput id="sid-a58479f7-8863-47d2-b306-ed0d891fa2e1"/>
-            <inputSet id="sid-7e11a7dc-dda4-40f7-8571-da586492c3bb" name="DefaultInputSet">
-               <dataInputRefs>sid-a58479f7-8863-47d2-b306-ed0d891fa2e1</dataInputRefs>
-               <outputSetRefs>sid-3e9a6a26-5ba4-427a-98d9-4e29a8f523f8</outputSetRefs>
-            </inputSet>
-            <outputSet id="sid-3e9a6a26-5ba4-427a-98d9-4e29a8f523f8" name="DefaultOutputSet">
-               <inputSetRefs>sid-7e11a7dc-dda4-40f7-8571-da586492c3bb</inputSetRefs>
-            </outputSet>
-         </ioSpecification>
-         <dataInputAssociation id="DataInputAssociation_1jyr48t">
-            <sourceRef>DataObjectReference_186ss4x</sourceRef>
-            <targetRef>sid-a58479f7-8863-47d2-b306-ed0d891fa2e1</targetRef>
-         </dataInputAssociation>
-      </serviceTask>
-      <endEvent id="EndEvent_1a8b14q" name="">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-            <signavio:signavioMetaData metaKey="nachfolgerprozesse" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_1k2gckd</incoming>
-      </endEvent>
-      <manualTask completionQuantity="1" id="RepairCar" isForCompensation="false" name="Repair or maintain car" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D</incoming>
-         <outgoing>SequenceFlow_0dcnyf8</outgoing>
-      </manualTask>
-      <userTask camunda:candidateGroups="Mechanics" camunda:formKey="webapps.forms.request-list.html" completionQuantity="1" id="CreateWorklist" implementation="##unspecified" isForCompensation="false" name="Create list of performed work" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_0dcnyf8</incoming>
-         <outgoing>SequenceFlow_1yurvlb</outgoing>
-         <ioSpecification id="sid-6d250a05-b048-4028-a582-9f411b0dcebc">
-            <dataOutput id="sid-18a8b372-4cd9-48cd-a73b-5597965dd1b0"/>
-            <inputSet id="sid-6fa8db94-28a7-412f-a7af-b82467398f3c" name="DefaultInputSet">
-               <outputSetRefs>sid-8da9395b-7d26-439f-8735-418ea2c3e387</outputSetRefs>
-            </inputSet>
-            <outputSet id="sid-8da9395b-7d26-439f-8735-418ea2c3e387" name="DefaultOutputSet">
-               <dataOutputRefs>sid-18a8b372-4cd9-48cd-a73b-5597965dd1b0</dataOutputRefs>
-               <inputSetRefs>sid-6fa8db94-28a7-412f-a7af-b82467398f3c</inputSetRefs>
-            </outputSet>
-         </ioSpecification>
-         <dataOutputAssociation id="DataOutputAssociation_0tdcokx">
-            <sourceRef>sid-18a8b372-4cd9-48cd-a73b-5597965dd1b0</sourceRef>
-            <targetRef>DataObjectReference_1ntnsyh</targetRef>
-         </dataOutputAssociation>
-      </userTask>
-      <serviceTask camunda:class="carsandco.garage.ProcessWorkList" completionQuantity="1" id="ProcessList" implementation="##unspecified" isForCompensation="false" name="Process list" startQuantity="1">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc"/>
-            <signavio:signavioMetaData metaKey="risklevel" metaValue=""/>
-            <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]"/>
-         </extensionElements>
-         <incoming>SequenceFlow_1yurvlb</incoming>
-         <outgoing>SequenceFlow_0s28k2s</outgoing>
-         <ioSpecification id="sid-e829db7a-21fa-4079-bdb6-a9289d767438">
-            <dataInput id="sid-cab45138-ef45-4560-9742-11cd5d75c770"/>
-            <inputSet id="sid-6859f1df-6f74-4f59-b4e4-7957307cd600" name="DefaultInputSet">
-               <dataInputRefs>sid-cab45138-ef45-4560-9742-11cd5d75c770</dataInputRefs>
-               <outputSetRefs>sid-5639fafe-5b67-4b7e-b667-d131af67644a</outputSetRefs>
-            </inputSet>
-            <outputSet id="sid-5639fafe-5b67-4b7e-b667-d131af67644a" name="DefaultOutputSet">
-               <inputSetRefs>sid-6859f1df-6f74-4f59-b4e4-7957307cd600</inputSetRefs>
-            </outputSet>
-         </ioSpecification>
-         <dataInputAssociation id="DataInputAssociation_0ofvob0">
-            <sourceRef>DataObjectReference_1ntnsyh</sourceRef>
-            <targetRef>sid-cab45138-ef45-4560-9742-11cd5d75c770</targetRef>
-         </dataInputAssociation>
-      </serviceTask>
-      <sequenceFlow id="SequenceFlow_1kewt8s" isImmediate="true" name="" sourceRef="StartEvent" targetRef="ReceiveTask"/>
-      <sequenceFlow id="SequenceFlow_17feuoq" isImmediate="true" name="" sourceRef="ReceiveTask" targetRef="SaveContract"/>
-      <sequenceFlow id="SequenceFlow_1l57bsq" isImmediate="true" name="" sourceRef="SaveContract" targetRef="ChooseStation"/>
-      <sequenceFlow id="SequenceFlow_1r7j2a0" isImmediate="true" name="" sourceRef="ChooseStation" targetRef="ConfirmContract"/>
-      <sequenceFlow id="SequenceFlow_1mmlauk" isImmediate="true" name="" sourceRef="ConfirmContract" targetRef="ConfirmContractUserTask"/>
-      <sequenceFlow id="SequenceFlow_0dcnyf8" isImmediate="true" name="" sourceRef="RepairCar" targetRef="CreateWorklist"/>
-      <sequenceFlow id="SequenceFlow_1yurvlb" isImmediate="true" name="" sourceRef="CreateWorklist" targetRef="ProcessList"/>
-      <sequenceFlow id="SequenceFlow_0s28k2s" isImmediate="true" name="" sourceRef="ProcessList" targetRef="CreateInvoice"/>
-      <sequenceFlow id="SequenceFlow_079jgz5" isImmediate="true" name="" sourceRef="CreateInvoice" targetRef="SendInvoice"/>
-      <sequenceFlow id="SequenceFlow_06q37ev" isImmediate="true" name="" sourceRef="SendInvoice" targetRef="ReceivePayment"/>
-      <sequenceFlow id="SequenceFlow_0yt3w5f" isImmediate="true" name="" sourceRef="ReceivePayment" targetRef="CheckPayment"/>
-      <sequenceFlow id="SequenceFlow_1k2gckd" isImmediate="true" name="" sourceRef="CheckPayment" targetRef="EndEvent_1a8b14q"/>
-      <sequenceFlow id="sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D" name="" sourceRef="ConfirmContractUserTask" targetRef="RepairCar"/>
-      <dataObjectReference dataObjectRef="sid-ec5257a8-3606-47cd-9f4e-c16f1644d3aa" id="Contract" name="contract">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-         </extensionElements>
-      </dataObjectReference>
-      <dataObjectReference dataObjectRef="sid-ec5257a8-3606-47cd-9f4e-c16f1644d3aa" id="DataObjectReference_1ndvyjq" name="contract">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-         </extensionElements>
-      </dataObjectReference>
-      <dataObjectReference dataObjectRef="sid-474eba02-00dc-4b24-8163-bbacd1e57451" id="DataObjectReference_1ntnsyh" name="List of performed work">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-         </extensionElements>
-      </dataObjectReference>
-      <dataObjectReference dataObjectRef="sid-ad7baaac-ea51-4fbb-946d-33aaa184670f" id="DataObjectReference_11583d0" name="Invoice">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-         </extensionElements>
-      </dataObjectReference>
-      <dataObjectReference dataObjectRef="sid-56df2c42-dc85-4823-b0dc-857d9cd67654" id="DataObjectReference_186ss4x" name="Payment Notification">
-         <extensionElements>
-            <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff"/>
-         </extensionElements>
-      </dataObjectReference>
-      <association associationDirection="None" id="Association_1yz89v1" sourceRef="SaveContract" targetRef="TextAnnotation_1xrk4cx"/>
-      <association associationDirection="None" id="Association_0f3jffc" sourceRef="CreateInvoice" targetRef="TextAnnotation_10pvc0s"/>
-      <association associationDirection="None" id="Association_1qtypwg" sourceRef="CheckPayment" targetRef="TextAnnotation_1fyo4ut"/>
-      <textAnnotation id="TextAnnotation_1xrk4cx" textFormat="text/plain">
-         <text>Database</text>
-      </textAnnotation>
-      <textAnnotation id="TextAnnotation_10pvc0s" textFormat="text/plain">
-         <text>Database</text>
-      </textAnnotation>
-      <textAnnotation id="TextAnnotation_1fyo4ut" textFormat="text/plain">
-         <text>Database</text>
-      </textAnnotation>
-   </process>
-   <bpmndi:BPMNDiagram id="sid-321017fe-2802-4a63-addb-afd1fef5dafa">
-      <bpmndi:BPMNPlane bpmnElement="sid-b7f268ab-9aeb-44fc-b4d6-e477fba2c1b0" id="sid-1d12a525-90d9-4904-b519-7f913d476dae">
-         <bpmndi:BPMNShape bpmnElement="CarsandcoPool" id="CarsandcoPool_gui" isHorizontal="true">
-            <omgdc:Bounds height="753.0" width="1709.0" x="123.0" y="252.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="67.11428833007812" width="12.0" x="128.0" y="594.9428558349609"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" id="sid-52B46558-F9CA-42D7-B308-4EEF650982B3_gui" isHorizontal="true">
-            <omgdc:Bounds height="60.0" width="499.99999999999994" x="146.15377556881373" y="84.90229885057465"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="20.0" width="45.0" x="373.6537755688137" y="101.90229885057465"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="sid-E2097639-94BD-4C5A-805B-892B799F53B4" id="sid-E2097639-94BD-4C5A-805B-892B799F53B4_gui" isHorizontal="true">
-            <omgdc:Bounds height="60.0" width="500.0" x="350.76906136515277" y="166.77203065134097"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="20.0" width="61.71429443359375" x="569.9119141483559" y="183.77203065134097"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="Lane_0jn0fc3" id="Lane_0jn0fc3_gui" isHorizontal="true">
-            <omgdc:Bounds height="232.0" width="1679.0" x="153.0" y="252.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="67.11428833007812" width="12.0" x="158.0" y="334.44285583496094"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="Lane_17u4vum" id="Lane_17u4vum_gui" isHorizontal="true">
-            <omgdc:Bounds height="270.0" width="1679.0" x="153.0" y="484.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="111.85713958740234" width="12.000000000000028" x="158.0" y="563.0714302062988"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="Lane_1n5k2vh" id="Lane_1n5k2vh_gui" isHorizontal="true">
-            <omgdc:Bounds height="251.0" width="1679.0" x="153.0" y="754.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="80.22856903076172" width="12.0" x="158.0" y="839.3857154846191"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="StartEvent" id="StartEvent_gui">
-            <omgdc:Bounds height="30.0" width="30.0" x="176.0" y="405.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
-               <omgdc:Bounds height="11.0" width="89.80714416503906" x="146.09642791748047" y="437.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="ReceiveTask" id="ReceiveTask_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="293.0" y="380.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="36.0" width="65.57142639160156" x="310.2142868041992" y="400.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="SaveContract" id="SaveContract_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="479.0" y="380.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="24.0" width="90.25714111328125" x="483.8714294433594" y="406.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="ChooseStation" id="ChooseStation_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="662.0" y="380.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="36.0" width="89.4857177734375" x="667.2571411132812" y="400.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="ConfirmContract" id="ConfirmContract_gui">
-            <omgdc:Bounds height="30.0" width="30.0" x="697.0" y="591.0977011494253"/>
-            <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
-               <omgdc:Bounds height="11.0" width="101.82857513427734" x="661.0857124328613" y="623.0977011494253"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="ConfirmContractUserTask" id="ConfirmContractUserTask_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="810.1657088122605" y="566.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="24.0" width="81.0" x="819.6657088122605" y="592.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="CreateInvoice" id="CreateInvoice_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="1160.0" y="566.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="36.0" width="75.5999984741211" x="1172.2000007629395" y="586.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="SendInvoice" id="SendInvoice_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="1338.532279314888" y="566.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="24.0" width="83.31428527832031" x="1346.8751366757278" y="592.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="ReceivePayment" id="ReceivePayment_gui">
-            <omgdc:Bounds height="30.0" width="30.0" x="1495.2714097496705" y="591.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
-               <omgdc:Bounds height="11.0" width="149.91429138183594" x="1435.3142640587525" y="623.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="CheckPayment" id="CheckPayment_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="1596.2714097496705" y="566.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="36.0" width="59.400001525878906" x="1616.571408986731" y="586.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="EndEvent_1a8b14q" id="EndEvent_1a8b14q_gui">
-            <omgdc:Bounds height="28.0" width="28.0" x="1758.2714097496705" y="591.0"/>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="RepairCar" id="RepairCar_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="810.3703703703703" y="797.2439335887611"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="24.0" width="65.57142639160156" x="827.5846571745695" y="823.2439335887611"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="CreateWorklist" id="CreateWorklist_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="984.6960408684547" y="797.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="24.0" width="86.39999389648438" x="991.4960439202125" y="823.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="ProcessList" id="ProcessList_gui">
-            <omgdc:Bounds height="80.0" width="100.0" x="1159.6960408684547" y="797.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="12.0" width="60.94285583496094" x="1179.2246129509742" y="829.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="Contract" id="Contract_gui">
-            <omgdc:Bounds height="50.0" width="36.0" x="510.5641762452108" y="271.77203065134097"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="24.0" width="23.914283752441406" x="516.6070343689901" y="282.77203065134097"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="DataObjectReference_1ndvyjq" id="DataObjectReference_1ndvyjq_gui">
-            <omgdc:Bounds height="50.0" width="36.0" x="986.4254777070064" y="581.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="24.0" width="23.914283752441406" x="992.4683358307857" y="592.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="DataObjectReference_1ntnsyh" id="DataObjectReference_1ntnsyh_gui">
-            <omgdc:Bounds height="50.0" width="36.0" x="1113.4254777070064" y="901.0547770700637"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="48.0" width="33.94285583496094" x="1114.454049789526" y="900.0547770700637"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="DataObjectReference_11583d0" id="DataObjectReference_11583d0_gui">
-            <omgdc:Bounds height="50.0" width="36.0" x="1286.4191082802547" y="668.1694267515924"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="24.0" width="26.22856903076172" x="1291.3048237648738" y="679.1694267515924"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="DataObjectReference_186ss4x" id="DataObjectReference_186ss4x_gui">
-            <omgdc:Bounds height="50.0" width="36.0" x="1539.4382165605095" y="496.7872611464968"/>
-            <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-               <omgdc:Bounds height="48.0" width="32.400001525878906" x="1541.23821579757" y="495.7872611464968"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="TextAnnotation_1xrk4cx" id="TextAnnotation_1xrk4cx_gui">
-            <omgdc:Bounds height="57.0" width="73.0" x="602.0" y="297.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
-               <omgdc:Bounds height="12.0" width="50.91428756713867" x="606.0" y="316.36000061035156"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="TextAnnotation_10pvc0s" id="TextAnnotation_10pvc0s_gui">
-            <omgdc:Bounds height="53.0" width="78.0" x="1092.0" y="666.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
-               <omgdc:Bounds height="12.0" width="50.91428756713867" x="1096.0" y="683.4400005340576"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNShape bpmnElement="TextAnnotation_1fyo4ut" id="TextAnnotation_1fyo4ut_gui">
-            <omgdc:Bounds height="50.0" width="75.0" x="1608.0" y="668.0"/>
-            <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
-               <omgdc:Bounds height="12.0" width="50.91428756713867" x="1612.0" y="684.0"/>
-            </bpmndi:BPMNLabel>
-         </bpmndi:BPMNShape>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1kewt8s" id="SequenceFlow_1kewt8s_gui">
-            <omgdi:waypoint x="206.0" y="420.0"/>
-            <omgdi:waypoint x="293.0" y="420.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_17feuoq" id="SequenceFlow_17feuoq_gui">
-            <omgdi:waypoint x="393.0" y="420.0"/>
-            <omgdi:waypoint x="479.0" y="420.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_1el7pfv" id="DataInputAssociation_1el7pfv_gui">
-            <omgdi:waypoint x="529.0" y="321.77203065134097"/>
-            <omgdi:waypoint x="529.0" y="380.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1l57bsq" id="SequenceFlow_1l57bsq_gui">
-            <omgdi:waypoint x="579.0" y="420.0"/>
-            <omgdi:waypoint x="662.0" y="420.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1r7j2a0" id="SequenceFlow_1r7j2a0_gui">
-            <omgdi:waypoint x="712.0" y="460.0"/>
-            <omgdi:waypoint x="712.0" y="591.0977011494253"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1mmlauk" id="SequenceFlow_1mmlauk_gui">
-            <omgdi:waypoint x="727.0" y="606.0827721354233"/>
-            <omgdi:waypoint x="810.1657088122605" y="606.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0dcnyf8" id="SequenceFlow_0dcnyf8_gui">
-            <omgdi:waypoint x="910.3703703703703" y="837.0"/>
-            <omgdi:waypoint x="984.6960408684547" y="837.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1yurvlb" id="SequenceFlow_1yurvlb_gui">
-            <omgdi:waypoint x="1084.6960408684547" y="837.0"/>
-            <omgdi:waypoint x="1159.6960408684547" y="837.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0s28k2s" id="SequenceFlow_0s28k2s_gui">
-            <omgdi:waypoint x="1210.0" y="797.0"/>
-            <omgdi:waypoint x="1210.0" y="646.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_079jgz5" id="SequenceFlow_079jgz5_gui">
-            <omgdi:waypoint x="1260.0" y="606.0"/>
-            <omgdi:waypoint x="1338.532279314888" y="606.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_06q37ev" id="SequenceFlow_06q37ev_gui">
-            <omgdi:waypoint x="1438.532279314888" y="606.0"/>
-            <omgdi:waypoint x="1495.2714097496705" y="606.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0yt3w5f" id="SequenceFlow_0yt3w5f_gui">
-            <omgdi:waypoint x="1525.2714097496705" y="606.0"/>
-            <omgdi:waypoint x="1596.2714097496705" y="606.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1k2gckd" id="SequenceFlow_1k2gckd_gui">
-            <omgdi:waypoint x="1696.2714097496705" y="605.996441527034"/>
-            <omgdi:waypoint x="1758.2714097496705" y="605.1835550181379"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_09x87l4" id="DataInputAssociation_09x87l4_gui">
-            <omgdi:waypoint x="986.4254777070064" y="606.0"/>
-            <omgdi:waypoint x="910.1657088122605" y="606.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_0tdcokx" id="DataOutputAssociation_0tdcokx_gui">
-            <omgdi:waypoint x="1078.1385987261147" y="877.0"/>
-            <omgdi:waypoint x="1113.4254777070064" y="910.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_0ofvob0" id="DataInputAssociation_0ofvob0_gui">
-            <omgdi:waypoint x="1149.4254777070064" y="904.5234649681529"/>
-            <omgdi:waypoint x="1174.0" y="877.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_1r8lkbp" id="DataOutputAssociation_1r8lkbp_gui">
-            <omgdi:waypoint x="1254.0860065624397" y="646.0"/>
-            <omgdi:waypoint x="1286.4191082802547" y="677.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_01rvq1m" id="DataInputAssociation_01rvq1m_gui">
-            <omgdi:waypoint x="1322.4191082802547" y="673.5808917197453"/>
-            <omgdi:waypoint x="1350.0" y="646.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="Association_1yz89v1" id="Association_1yz89v1_gui">
-            <omgdi:waypoint x="575.4137931034483" y="380.0"/>
-            <omgdi:waypoint x="605.0" y="354.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="Association_0f3jffc" id="Association_0f3jffc_gui">
-            <omgdi:waypoint x="1173.0" y="646.0"/>
-            <omgdi:waypoint x="1155.0" y="666.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="Association_1qtypwg" id="Association_1qtypwg_gui">
-            <omgdi:waypoint x="1646.0" y="646.0"/>
-            <omgdi:waypoint x="1645.0" y="668.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_1jyr48t" id="DataInputAssociation_1jyr48t_gui">
-            <omgdi:waypoint x="1575.4382165605095" y="539.4090021231423"/>
-            <omgdi:waypoint x="1603.9285714285713" y="566.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="sid-D70034FE-D2AA-4E50-9CFF-31B81464F4AD" id="sid-D70034FE-D2AA-4E50-9CFF-31B81464F4AD_gui">
-            <omgdi:waypoint x="191.0" y="144.90229885057465"/>
-            <omgdi:waypoint x="191.0" y="405.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="sid-E0C861EA-1195-46AE-A016-1C2E2BEF807E" id="sid-E0C861EA-1195-46AE-A016-1C2E2BEF807E_gui">
-            <omgdi:waypoint x="350.76906136515277" y="195.77203065134097"/>
-            <omgdi:waypoint x="191.0" y="195.77203065134097"/>
-            <omgdi:waypoint x="191.0" y="405.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="sid-7CD03FC4-11AC-4A3C-B227-DBF29A5403FC" id="sid-7CD03FC4-11AC-4A3C-B227-DBF29A5403FC_gui">
-            <omgdi:waypoint x="646.1537755688137" y="113.90229885057465"/>
-            <omgdi:waypoint x="1510.2714097496705" y="113.90229885057465"/>
-            <omgdi:waypoint x="1510.2714097496705" y="591.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="sid-D9500239-D683-482B-A389-A4A584A2D87F" id="sid-D9500239-D683-482B-A389-A4A584A2D87F_gui">
-            <omgdi:waypoint x="1388.532279314888" y="566.0"/>
-            <omgdi:waypoint x="1388.532279314888" y="209.0"/>
-            <omgdi:waypoint x="850.7690613651527" y="209.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D" id="sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D_gui">
-            <omgdi:waypoint x="860.2011106591212" y="646.0"/>
-            <omgdi:waypoint x="860.3349685235096" y="797.2439335887611"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="sid-D6DBE11A-D38A-4F64-A750-0175B4AE51F9" id="sid-D6DBE11A-D38A-4F64-A750-0175B4AE51F9_gui">
-            <omgdi:waypoint x="850.7690613651528" y="185.0"/>
-            <omgdi:waypoint x="1501.0" y="185.0"/>
-            <omgdi:waypoint x="1501.0" y="591.0"/>
-         </bpmndi:BPMNEdge>
-         <bpmndi:BPMNEdge bpmnElement="sid-29672964-0ACE-49CE-9D6E-BE9B0A50AE52" id="sid-29672964-0ACE-49CE-9D6E-BE9B0A50AE52_gui">
-            <omgdi:waypoint x="1363.532279314888" y="566.0"/>
-            <omgdi:waypoint x="1363.532279314888" y="132.0"/>
-            <omgdi:waypoint x="646.1537755688137" y="132.0"/>
-         </bpmndi:BPMNEdge>
-      </bpmndi:BPMNPlane>
-      <bpmndi:BPMNLabelStyle id="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
-         <omgdc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Arial" size="11.0"/>
-      </bpmndi:BPMNLabelStyle>
-      <bpmndi:BPMNLabelStyle id="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
-         <omgdc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Arial" size="12.0"/>
-      </bpmndi:BPMNLabelStyle>
-   </bpmndi:BPMNDiagram>
+    </participant>
+    <participant id="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" name="BVIS">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+      </extensionElements>
+    </participant>
+    <participant id="sid-E2097639-94BD-4C5A-805B-892B799F53B4" name="Capitol">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+      </extensionElements>
+    </participant>
+    <messageFlow id="sid-D70034FE-D2AA-4E50-9CFF-31B81464F4AD" name="" sourceRef="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" targetRef="Start_Process" />
+    <messageFlow id="sid-E0C861EA-1195-46AE-A016-1C2E2BEF807E" name="" sourceRef="sid-E2097639-94BD-4C5A-805B-892B799F53B4" targetRef="Start_Process" />
+    <messageFlow id="sid-7CD03FC4-11AC-4A3C-B227-DBF29A5403FC" name="" sourceRef="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" targetRef="ReceivePayment" />
+    <messageFlow id="sid-D9500239-D683-482B-A389-A4A584A2D87F" name="" sourceRef="SendInvoice" targetRef="sid-E2097639-94BD-4C5A-805B-892B799F53B4" />
+    <messageFlow id="sid-D6DBE11A-D38A-4F64-A750-0175B4AE51F9" name="" sourceRef="sid-E2097639-94BD-4C5A-805B-892B799F53B4" targetRef="ReceivePayment" />
+    <messageFlow id="sid-29672964-0ACE-49CE-9D6E-BE9B0A50AE52" name="" sourceRef="SendInvoice" targetRef="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" />
+  </collaboration>
+  <process id="CarsAndCoProcess" name="Cars and Co" processType="None" isClosed="false" isExecutable="true">
+    <extensionElements />
+    <laneSet id="sid-c1fddc28-7472-4412-b342-6daf445d3d39">
+      <lane id="Lane_0jn0fc3" name="Headquarter">
+        <extensionElements>
+          <signavio:signavioMetaData metaKey="bgcolor" metaValue="" />
+        </extensionElements>
+        <flowNodeRef>ChooseStation</flowNodeRef>
+        <flowNodeRef>SaveContract</flowNodeRef>
+        <flowNodeRef>Start_Process</flowNodeRef>
+      </lane>
+      <lane id="Lane_17u4vum" name="Station Management">
+        <extensionElements>
+          <signavio:signavioMetaData metaKey="bgcolor" metaValue="" />
+        </extensionElements>
+        <flowNodeRef>ConfirmContractUserTask</flowNodeRef>
+        <flowNodeRef>CreateInvoice</flowNodeRef>
+        <flowNodeRef>SendInvoice</flowNodeRef>
+        <flowNodeRef>ReceivePayment</flowNodeRef>
+        <flowNodeRef>CheckPayment</flowNodeRef>
+        <flowNodeRef>EndEvent</flowNodeRef>
+      </lane>
+      <lane id="Lane_1n5k2vh" name="Station garage">
+        <extensionElements>
+          <signavio:signavioMetaData metaKey="bgcolor" metaValue="" />
+        </extensionElements>
+        <flowNodeRef>RepairCar</flowNodeRef>
+        <flowNodeRef>CreateWorklist</flowNodeRef>
+        <flowNodeRef>ProcessList</flowNodeRef>
+      </lane>
+    </laneSet>
+    <dataObject id="sid-474eba02-00dc-4b24-8163-bbacd1e57451" name="List of performed work" />
+    <dataObject id="sid-ad7baaac-ea51-4fbb-946d-33aaa184670f" name="Invoice" />
+    <dataObject id="sid-56df2c42-dc85-4823-b0dc-857d9cd67654" name="Payment Notification" />
+    <userTask id="ConfirmContractUserTask" name="Check contract information" implementation="##unspecified" camunda:candidateGroups="Management">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_1ju7uno</incoming>
+      <outgoing>sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D</outgoing>
+      <ioSpecification id="sid-eeb91b56-0572-4a23-ad41-70279f6c5f34">
+        <dataInput id="sid-499e40bb-7d82-4025-a4b1-10510d53a291" />
+        <inputSet id="sid-fd3e9470-ea54-4742-91ac-a16ad08f5836" name="DefaultInputSet">
+          <dataInputRefs>sid-499e40bb-7d82-4025-a4b1-10510d53a291</dataInputRefs>
+          <outputSetRefs>sid-12885599-0441-4aa4-904e-38f313dd57f6</outputSetRefs>
+        </inputSet>
+        <outputSet id="sid-12885599-0441-4aa4-904e-38f313dd57f6" name="DefaultOutputSet">
+          <inputSetRefs>sid-fd3e9470-ea54-4742-91ac-a16ad08f5836</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation id="DataInputAssociation_09x87l4">
+        <sourceRef>DataObjectReference_1ndvyjq</sourceRef>
+        <targetRef>sid-499e40bb-7d82-4025-a4b1-10510d53a291</targetRef>
+      </dataInputAssociation>
+    </userTask>
+    <serviceTask id="CreateInvoice" name="Create invoice and save to database" implementation="##unspecified" camunda:class="carsandco.management.CreateInvoice">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_0s28k2s</incoming>
+      <outgoing>SequenceFlow_079jgz5</outgoing>
+      <ioSpecification id="sid-4f57c136-ca32-41d3-8785-a0a9293f7a0e">
+        <dataOutput id="sid-bcfe855c-0202-4ce5-b899-ea798dce8a51" />
+        <inputSet id="sid-5a8b3a85-a861-44c2-a936-5c746679c29a" name="DefaultInputSet">
+          <outputSetRefs>sid-784c9d21-aad9-415c-950c-09c4a7c40890</outputSetRefs>
+        </inputSet>
+        <outputSet id="sid-784c9d21-aad9-415c-950c-09c4a7c40890" name="DefaultOutputSet">
+          <dataOutputRefs>sid-bcfe855c-0202-4ce5-b899-ea798dce8a51</dataOutputRefs>
+          <inputSetRefs>sid-5a8b3a85-a861-44c2-a936-5c746679c29a</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataOutputAssociation id="DataOutputAssociation_1r8lkbp">
+        <sourceRef>sid-bcfe855c-0202-4ce5-b899-ea798dce8a51</sourceRef>
+        <targetRef>DataObjectReference_11583d0</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
+    <sendTask id="SendInvoice" name="Send invoice to contract parter" implementation="##unspecified" camunda:class="carsandco.management.SendInvoice">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_079jgz5</incoming>
+      <outgoing>SequenceFlow_06q37ev</outgoing>
+      <ioSpecification id="sid-74b23a4c-6c94-4550-b4bb-580657aa9685">
+        <dataInput id="sid-699fa703-2e1f-48be-a6e7-c17664ba7e45" />
+        <inputSet id="sid-0f4d4119-9cea-436f-882d-45cc764c8877" name="DefaultInputSet">
+          <dataInputRefs>sid-699fa703-2e1f-48be-a6e7-c17664ba7e45</dataInputRefs>
+          <outputSetRefs>sid-6edba83d-4dad-4da3-aaaa-5c5659a6420e</outputSetRefs>
+        </inputSet>
+        <outputSet id="sid-6edba83d-4dad-4da3-aaaa-5c5659a6420e" name="DefaultOutputSet">
+          <inputSetRefs>sid-0f4d4119-9cea-436f-882d-45cc764c8877</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation id="DataInputAssociation_01rvq1m">
+        <sourceRef>DataObjectReference_11583d0</sourceRef>
+        <targetRef>sid-699fa703-2e1f-48be-a6e7-c17664ba7e45</targetRef>
+      </dataInputAssociation>
+    </sendTask>
+    <intermediateCatchEvent id="ReceivePayment" name="Incoming Payment Notification">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="viaitsystem" metaValue="" />
+      </extensionElements>
+      <incoming>SequenceFlow_06q37ev</incoming>
+      <outgoing>SequenceFlow_0yt3w5f</outgoing>
+      <messageEventDefinition id="sid-059a1646-dc35-48f6-899e-d1f2f62c4b65" messageRef="Message_1k2p4f2" />
+    </intermediateCatchEvent>
+    <serviceTask id="CheckPayment" name="Process payment notification" implementation="##unspecified" camunda:class="carsandco.management.CheckPayment">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_0yt3w5f</incoming>
+      <outgoing>SequenceFlow_1k2gckd</outgoing>
+      <ioSpecification id="sid-d03e739e-acaa-486e-b3ae-7d2419dcc067">
+        <dataInput id="sid-a58479f7-8863-47d2-b306-ed0d891fa2e1" />
+        <inputSet id="sid-7e11a7dc-dda4-40f7-8571-da586492c3bb" name="DefaultInputSet">
+          <dataInputRefs>sid-a58479f7-8863-47d2-b306-ed0d891fa2e1</dataInputRefs>
+          <outputSetRefs>sid-3e9a6a26-5ba4-427a-98d9-4e29a8f523f8</outputSetRefs>
+        </inputSet>
+        <outputSet id="sid-3e9a6a26-5ba4-427a-98d9-4e29a8f523f8" name="DefaultOutputSet">
+          <inputSetRefs>sid-7e11a7dc-dda4-40f7-8571-da586492c3bb</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation id="DataInputAssociation_1jyr48t">
+        <sourceRef>DataObjectReference_186ss4x</sourceRef>
+        <targetRef>sid-a58479f7-8863-47d2-b306-ed0d891fa2e1</targetRef>
+      </dataInputAssociation>
+    </serviceTask>
+    <endEvent id="EndEvent" name="End Process">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="nachfolgerprozesse" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_1k2gckd</incoming>
+    </endEvent>
+    <manualTask id="RepairCar" name="Repair or maintain car">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D</incoming>
+      <outgoing>SequenceFlow_0dcnyf8</outgoing>
+    </manualTask>
+    <userTask id="CreateWorklist" name="Create list of performed work" implementation="##unspecified" camunda:formKey="webapps.forms.request-list.html" camunda:candidateGroups="Mechanics">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_0dcnyf8</incoming>
+      <outgoing>SequenceFlow_1yurvlb</outgoing>
+      <ioSpecification id="sid-6d250a05-b048-4028-a582-9f411b0dcebc">
+        <dataOutput id="sid-18a8b372-4cd9-48cd-a73b-5597965dd1b0" />
+        <inputSet id="sid-6fa8db94-28a7-412f-a7af-b82467398f3c" name="DefaultInputSet">
+          <outputSetRefs>sid-8da9395b-7d26-439f-8735-418ea2c3e387</outputSetRefs>
+        </inputSet>
+        <outputSet id="sid-8da9395b-7d26-439f-8735-418ea2c3e387" name="DefaultOutputSet">
+          <dataOutputRefs>sid-18a8b372-4cd9-48cd-a73b-5597965dd1b0</dataOutputRefs>
+          <inputSetRefs>sid-6fa8db94-28a7-412f-a7af-b82467398f3c</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataOutputAssociation id="DataOutputAssociation_0tdcokx">
+        <sourceRef>sid-18a8b372-4cd9-48cd-a73b-5597965dd1b0</sourceRef>
+        <targetRef>DataObjectReference_1ntnsyh</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <serviceTask id="ProcessList" name="Process list" implementation="##unspecified" camunda:class="carsandco.garage.ProcessWorkList">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_1yurvlb</incoming>
+      <outgoing>SequenceFlow_0s28k2s</outgoing>
+      <ioSpecification id="sid-e829db7a-21fa-4079-bdb6-a9289d767438">
+        <dataInput id="sid-cab45138-ef45-4560-9742-11cd5d75c770" />
+        <inputSet id="sid-6859f1df-6f74-4f59-b4e4-7957307cd600" name="DefaultInputSet">
+          <dataInputRefs>sid-cab45138-ef45-4560-9742-11cd5d75c770</dataInputRefs>
+          <outputSetRefs>sid-5639fafe-5b67-4b7e-b667-d131af67644a</outputSetRefs>
+        </inputSet>
+        <outputSet id="sid-5639fafe-5b67-4b7e-b667-d131af67644a" name="DefaultOutputSet">
+          <inputSetRefs>sid-6859f1df-6f74-4f59-b4e4-7957307cd600</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation id="DataInputAssociation_0ofvob0">
+        <sourceRef>DataObjectReference_1ntnsyh</sourceRef>
+        <targetRef>sid-cab45138-ef45-4560-9742-11cd5d75c770</targetRef>
+      </dataInputAssociation>
+    </serviceTask>
+    <sequenceFlow id="SequenceFlow_1l57bsq" name="" isImmediate="true" sourceRef="SaveContract" targetRef="ChooseStation" />
+    <sequenceFlow id="SequenceFlow_0dcnyf8" name="" isImmediate="true" sourceRef="RepairCar" targetRef="CreateWorklist" />
+    <sequenceFlow id="SequenceFlow_1yurvlb" name="" isImmediate="true" sourceRef="CreateWorklist" targetRef="ProcessList" />
+    <sequenceFlow id="SequenceFlow_0s28k2s" name="" isImmediate="true" sourceRef="ProcessList" targetRef="CreateInvoice" />
+    <sequenceFlow id="SequenceFlow_079jgz5" name="" isImmediate="true" sourceRef="CreateInvoice" targetRef="SendInvoice" />
+    <sequenceFlow id="SequenceFlow_06q37ev" name="" isImmediate="true" sourceRef="SendInvoice" targetRef="ReceivePayment" />
+    <sequenceFlow id="SequenceFlow_0yt3w5f" name="" isImmediate="true" sourceRef="ReceivePayment" targetRef="CheckPayment" />
+    <sequenceFlow id="SequenceFlow_1k2gckd" name="" isImmediate="true" sourceRef="CheckPayment" targetRef="EndEvent" />
+    <sequenceFlow id="sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D" name="" sourceRef="ConfirmContractUserTask" targetRef="RepairCar" />
+    <dataObjectReference id="DataObjectReference_1ntnsyh" name="List of performed work" dataObjectRef="sid-474eba02-00dc-4b24-8163-bbacd1e57451">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+      </extensionElements>
+    </dataObjectReference>
+    <dataObjectReference id="DataObjectReference_11583d0" name="Invoice" dataObjectRef="sid-ad7baaac-ea51-4fbb-946d-33aaa184670f">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+      </extensionElements>
+    </dataObjectReference>
+    <dataObjectReference id="DataObjectReference_186ss4x" name="Payment Notification" dataObjectRef="sid-56df2c42-dc85-4823-b0dc-857d9cd67654">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+      </extensionElements>
+    </dataObjectReference>
+    <sequenceFlow id="SequenceFlow_0pqynmz" sourceRef="Start_Process" targetRef="SaveContract" />
+    <sequenceFlow id="SequenceFlow_1ju7uno" sourceRef="ChooseStation" targetRef="ConfirmContractUserTask" />
+    <serviceTask id="ChooseStation" name="Choose service station and redirect contract" implementation="##unspecified" camunda:class="carsandco.headquarter.ChooseStation">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_1l57bsq</incoming>
+      <outgoing>SequenceFlow_1ju7uno</outgoing>
+    </serviceTask>
+    <serviceTask id="SaveContract" name="Save contract to database" implementation="##unspecified" camunda:class="carsandco.headquarter.SaveToDatabase">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
+        <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+      </extensionElements>
+      <incoming>SequenceFlow_0pqynmz</incoming>
+      <outgoing>SequenceFlow_1l57bsq</outgoing>
+      <ioSpecification id="sid-9971d300-8455-4c45-a9de-038a435f6114">
+        <dataInput id="sid-da524761-7359-48ec-972d-c130cfa4f4ec" />
+        <inputSet id="sid-4b3704c4-d69a-4e35-9fea-ae8682636dab" name="DefaultInputSet">
+          <dataInputRefs>sid-da524761-7359-48ec-972d-c130cfa4f4ec</dataInputRefs>
+          <outputSetRefs>sid-04f61ac6-2878-4539-b391-c6c6c4701bb0</outputSetRefs>
+        </inputSet>
+        <outputSet id="sid-04f61ac6-2878-4539-b391-c6c6c4701bb0" name="DefaultOutputSet">
+          <inputSetRefs>sid-4b3704c4-d69a-4e35-9fea-ae8682636dab</inputSetRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation id="DataInputAssociation_1el7pfv">
+        <sourceRef>Contract</sourceRef>
+        <targetRef>sid-da524761-7359-48ec-972d-c130cfa4f4ec</targetRef>
+      </dataInputAssociation>
+    </serviceTask>
+    <startEvent id="Start_Process" name="Incoming contract">
+      <outgoing>SequenceFlow_0pqynmz</outgoing>
+      <messageEventDefinition messageRef="Message_1loekon" />
+    </startEvent>
+    <dataObjectReference id="Contract" name="contract" dataObjectRef="sid-ec5257a8-3606-47cd-9f4e-c16f1644d3aa">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+      </extensionElements>
+    </dataObjectReference>
+    <dataObjectReference id="DataObjectReference_1ndvyjq" name="contract" dataObjectRef="sid-ec5257a8-3606-47cd-9f4e-c16f1644d3aa">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+      </extensionElements>
+    </dataObjectReference>
+    <dataObject id="sid-ec5257a8-3606-47cd-9f4e-c16f1644d3aa" name="contract" />
+    <association id="Association_1yz89v1" associationDirection="None" sourceRef="SaveContract" targetRef="TextAnnotation_1xrk4cx" />
+    <association id="Association_0f3jffc" associationDirection="None" sourceRef="CreateInvoice" targetRef="TextAnnotation_10pvc0s" />
+    <association id="Association_1qtypwg" associationDirection="None" sourceRef="CheckPayment" targetRef="TextAnnotation_1fyo4ut" />
+    <textAnnotation id="TextAnnotation_10pvc0s">    <text>Database</text>
+</textAnnotation>
+    <textAnnotation id="TextAnnotation_1fyo4ut">    <text>Database</text>
+</textAnnotation>
+    <textAnnotation id="TextAnnotation_1xrk4cx">    <text>Database</text>
+</textAnnotation>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-321017fe-2802-4a63-addb-afd1fef5dafa">
+    <bpmndi:BPMNPlane id="sid-1d12a525-90d9-4904-b519-7f913d476dae" bpmnElement="sid-b7f268ab-9aeb-44fc-b4d6-e477fba2c1b0">
+      <bpmndi:BPMNShape id="CarsandcoPool_gui" bpmnElement="CarsandcoPool" isHorizontal="true">
+        <omgdc:Bounds x="280" y="252" width="1552" height="727" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="128" y="594.9428558349609" width="12" height="67.11428833007812" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-52B46558-F9CA-42D7-B308-4EEF650982B3_gui" bpmnElement="sid-52B46558-F9CA-42D7-B308-4EEF650982B3" isHorizontal="true">
+        <omgdc:Bounds x="323" y="85" width="1271" height="68" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="373.6537755688137" y="101.90229885057465" width="45" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-E2097639-94BD-4C5A-805B-892B799F53B4_gui" bpmnElement="sid-E2097639-94BD-4C5A-805B-892B799F53B4" isHorizontal="true">
+        <omgdc:Bounds x="415" y="167" width="1015" height="62" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="569.9119141483559" y="183.77203065134097" width="61.71429443359375" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0jn0fc3_gui" bpmnElement="Lane_0jn0fc3" isHorizontal="true">
+        <omgdc:Bounds x="310" y="252" width="1522" height="232" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="158" y="334.44285583496094" width="12" height="67.11428833007812" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_17u4vum_gui" bpmnElement="Lane_17u4vum" isHorizontal="true">
+        <omgdc:Bounds x="310" y="484" width="1522" height="270" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="158" y="563.0714302062988" width="12.000000000000028" height="111.85713958740234" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1n5k2vh_gui" bpmnElement="Lane_1n5k2vh" isHorizontal="true">
+        <omgdc:Bounds x="310" y="754" width="1522" height="225" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="158" y="839.3857154846191" width="12" height="80.22856903076172" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SaveContract_gui" bpmnElement="SaveContract">
+        <omgdc:Bounds x="610" y="357" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="483.8714294433594" y="406" width="90.25714111328125" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ChooseStation_gui" bpmnElement="ChooseStation">
+        <omgdc:Bounds x="810" y="357" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="667.2571411132812" y="400" width="89.4857177734375" height="36" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ConfirmContractUserTask_gui" bpmnElement="ConfirmContractUserTask">
+        <omgdc:Bounds x="810.1657088122605" y="566" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="819.6657088122605" y="592" width="81" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CreateInvoice_gui" bpmnElement="CreateInvoice">
+        <omgdc:Bounds x="1160" y="566" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="1172.2000007629395" y="586" width="75.5999984741211" height="36" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendInvoice_gui" bpmnElement="SendInvoice">
+        <omgdc:Bounds x="1338.532279314888" y="566" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="1346.8751366757278" y="592" width="83.31428527832031" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ReceivePayment_gui" bpmnElement="ReceivePayment">
+        <omgdc:Bounds x="1495.2714097496705" y="591" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
+          <omgdc:Bounds x="1435.3142640587525" y="623" width="149.91429138183594" height="11" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CheckPayment_gui" bpmnElement="CheckPayment">
+        <omgdc:Bounds x="1596.2714097496705" y="566" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="1616.571408986731" y="586" width="59.400001525878906" height="36" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1a8b14q_gui" bpmnElement="EndEvent">
+        <omgdc:Bounds x="1758.2714097496705" y="591" width="28" height="28" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RepairCar_gui" bpmnElement="RepairCar">
+        <omgdc:Bounds x="810.3703703703703" y="797.2439335887611" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="827.5846571745695" y="823.2439335887611" width="65.57142639160156" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CreateWorklist_gui" bpmnElement="CreateWorklist">
+        <omgdc:Bounds x="984.6960408684547" y="797" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="991.4960439202125" y="823" width="86.39999389648438" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcessList_gui" bpmnElement="ProcessList">
+        <omgdc:Bounds x="1159.6960408684547" y="797" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="1179.2246129509742" y="829" width="60.94285583496094" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Contract_gui" bpmnElement="Contract">
+        <omgdc:Bounds x="642" y="269" width="36" height="50" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="613" y="280" width="90" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1ndvyjq_gui" bpmnElement="DataObjectReference_1ndvyjq">
+        <omgdc:Bounds x="986" y="581" width="36" height="50" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="959" y="592" width="90" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1ntnsyh_gui" bpmnElement="DataObjectReference_1ntnsyh">
+        <omgdc:Bounds x="1113.4254777070064" y="901.0547770700637" width="36" height="50" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="1086" y="913" width="90" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_11583d0_gui" bpmnElement="DataObjectReference_11583d0">
+        <omgdc:Bounds x="1286.4191082802547" y="668.1694267515924" width="36" height="50" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="1291.3048237648738" y="679.1694267515924" width="26.22856903076172" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_186ss4x_gui" bpmnElement="DataObjectReference_186ss4x">
+        <omgdc:Bounds x="1539.4382165605095" y="496.7872611464968" width="36" height="50" />
+        <bpmndi:BPMNLabel labelStyle="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+          <omgdc:Bounds x="1513" y="509" width="90" height="48" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1xrk4cx_gui" bpmnElement="TextAnnotation_1xrk4cx">
+        <omgdc:Bounds x="748" y="276" width="73" height="57" />
+        <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
+          <omgdc:Bounds x="606" y="316.36000061035156" width="50.91428756713867" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_10pvc0s_gui" bpmnElement="TextAnnotation_10pvc0s">
+        <omgdc:Bounds x="1092" y="666" width="78" height="53" />
+        <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
+          <omgdc:Bounds x="1096" y="683.4400005340576" width="50.91428756713867" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1fyo4ut_gui" bpmnElement="TextAnnotation_1fyo4ut">
+        <omgdc:Bounds x="1608" y="668" width="75" height="50" />
+        <bpmndi:BPMNLabel labelStyle="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
+          <omgdc:Bounds x="1612" y="684" width="50.91428756713867" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1el7pfv_gui" bpmnElement="DataInputAssociation_1el7pfv">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="660" y="319" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="660" y="357" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1l57bsq_gui" bpmnElement="SequenceFlow_1l57bsq">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="710" y="397" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="810" y="397" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0dcnyf8_gui" bpmnElement="SequenceFlow_0dcnyf8">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="910.3703703703703" y="837" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="984.6960408684547" y="837" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1yurvlb_gui" bpmnElement="SequenceFlow_1yurvlb">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1084.6960408684547" y="837" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1159.6960408684547" y="837" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0s28k2s_gui" bpmnElement="SequenceFlow_0s28k2s">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1210" y="797" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1210" y="646" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_079jgz5_gui" bpmnElement="SequenceFlow_079jgz5">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1260" y="606" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1338.532279314888" y="606" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_06q37ev_gui" bpmnElement="SequenceFlow_06q37ev">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1438.532279314888" y="606" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1495.2714097496705" y="606" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0yt3w5f_gui" bpmnElement="SequenceFlow_0yt3w5f">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1525.2714097496705" y="606" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1596.2714097496705" y="606" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1k2gckd_gui" bpmnElement="SequenceFlow_1k2gckd">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1696.2714097496705" y="605.996441527034" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1758.2714097496705" y="605.1835550181379" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_09x87l4_gui" bpmnElement="DataInputAssociation_09x87l4">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="986.4254777070064" y="606" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="910.1657088122605" y="606" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0tdcokx_gui" bpmnElement="DataOutputAssociation_0tdcokx">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1078.1385987261147" y="877" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1113.4254777070064" y="910" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0ofvob0_gui" bpmnElement="DataInputAssociation_0ofvob0">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1149.4254777070064" y="904.5234649681529" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1174" y="877" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1r8lkbp_gui" bpmnElement="DataOutputAssociation_1r8lkbp">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1254.0860065624397" y="646" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1286.4191082802547" y="677" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_01rvq1m_gui" bpmnElement="DataInputAssociation_01rvq1m">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1322.4191082802547" y="673.5808917197453" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1350" y="646" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1yz89v1_gui" bpmnElement="Association_1yz89v1">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="710" y="367" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="751" y="333" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0f3jffc_gui" bpmnElement="Association_0f3jffc">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1173" y="646" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1155" y="666" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1qtypwg_gui" bpmnElement="Association_1qtypwg">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1646" y="646" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1645" y="668" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1jyr48t_gui" bpmnElement="DataInputAssociation_1jyr48t">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1575.4382165605095" y="539.4090021231423" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1603.9285714285713" y="566" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-D70034FE-D2AA-4E50-9CFF-31B81464F4AD_gui" bpmnElement="sid-D70034FE-D2AA-4E50-9CFF-31B81464F4AD">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="371" y="153" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="371" y="397" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="450" y="397" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-E0C861EA-1195-46AE-A016-1C2E2BEF807E_gui" bpmnElement="sid-E0C861EA-1195-46AE-A016-1C2E2BEF807E">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="468" y="229" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="468" y="379" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-7CD03FC4-11AC-4A3C-B227-DBF29A5403FC_gui" bpmnElement="sid-7CD03FC4-11AC-4A3C-B227-DBF29A5403FC">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1547" y="153" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1547" y="369" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1510" y="369" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1510" y="591" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-D9500239-D683-482B-A389-A4A584A2D87F_gui" bpmnElement="sid-D9500239-D683-482B-A389-A4A584A2D87F">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1389" y="566" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1389" y="229" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D_gui" bpmnElement="sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="860.2011106591212" y="646" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="860.3349685235096" y="797.2439335887611" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-D6DBE11A-D38A-4F64-A750-0175B4AE51F9_gui" bpmnElement="sid-D6DBE11A-D38A-4F64-A750-0175B4AE51F9">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1430" y="186" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1501" y="186" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1501" y="591" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-29672964-0ACE-49CE-9D6E-BE9B0A50AE52_gui" bpmnElement="sid-29672964-0ACE-49CE-9D6E-BE9B0A50AE52">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1364" y="566" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="1364" y="153" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0pqynmz_di" bpmnElement="SequenceFlow_0pqynmz">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="486" y="397" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="610" y="397" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="340" y="410" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ju7uno_di" bpmnElement="SequenceFlow_1ju7uno">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="860" y="437" />
+        <omgdi:waypoint xsi:type="omgdc:Point" x="860" y="566" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="756" y="503" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_1akfx96_di" bpmnElement="Start_Process">
+        <omgdc:Bounds x="450" y="379" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="423" y="415" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="sid-75762c5f-c61c-423c-9f28-77d51cd393d0">
+      <omgdc:Font name="Arial" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" />
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="sid-584e156b-d0ab-44ed-9e78-2defc4244471">
+      <omgdc:Font name="Arial" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" />
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
 </definitions>
