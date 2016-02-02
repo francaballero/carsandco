@@ -8,7 +8,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
@@ -20,32 +22,30 @@ import de.uniko.digicom.carsandco.messages.PaymentNotification;
 
 @Path("/payment")
 public class ReceivePaymentNotification {
+	
+	private static final Logger LOGGER = Logger.getLogger(ReceivePaymentNotification.class);
 	ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 	RuntimeService runtimeService = processEngine.getRuntimeService();
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void incomingContractHandler(InputStream incomingData) {
+	public Response incomingContractHandler(InputStream incomingData) {
 		String paymentNoteJson = "";
 		try {
-//Receive POST data (PaymentNotification)
+			// Receive POST data (PaymentNotification)
 			BufferedReader input = new BufferedReader(new InputStreamReader(incomingData));
 			PaymentNotification paymentNote = new Gson().fromJson(input, PaymentNotification.class);
 			paymentNoteJson = JsonHandler.toJson(paymentNote);
-			
-			System.out.println("Payment Notification received:");
-			System.out.println(paymentNoteJson);
-//Continue camunda execution			
+			LOGGER.info("Payment Notification received: \n" + JsonHandler.printJSON(paymentNoteJson));
+			// Continue camunda execution
 			runtimeService.createMessageCorrelation("payment")
-			.processInstanceBusinessKey(paymentNote.getTransactionKey())
-			.setVariable("paymentNotification", paymentNoteJson).correlate();
-			System.out.println("Process with business key: " + paymentNote.getTransactionKey() + " continued.");
-			
-			
+					.processInstanceBusinessKey(paymentNote.getTransactionKey())
+					.setVariable("paymentNotification", paymentNoteJson).correlate();
+			return Response.status(200).entity(paymentNoteJson).build();
 		} catch (Exception e) {
-			System.err.println("Error Parsing Payment Notification: - ");
+			LOGGER.error("Error Parsing Payment Notification: - ");
 			e.printStackTrace();
+			return Response.status(404).entity(paymentNoteJson).build();
 		}
-		
 	}
 }

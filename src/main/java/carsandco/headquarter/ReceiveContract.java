@@ -9,6 +9,7 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import com.google.gson.Gson;
 
 import carsandco.tools.JsonHandler;
+import carsandco.tools.MongoClass;
 import de.uniko.digicom.carsandco.messages.RepairContract;
 
 import java.io.BufferedReader;
@@ -25,33 +26,37 @@ import javax.ws.rs.core.Response;
 
 @Path("/new")
 public class ReceiveContract {
-		private static final Logger LOGGER = Logger.getLogger(ReceiveContract.class);
-		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-		RuntimeService runtimeService = processEngine.getRuntimeService();
+	
+	private static final Logger LOGGER = Logger.getLogger(ReceiveContract.class);
+	ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+	RuntimeService runtimeService = processEngine.getRuntimeService();
 
-		@POST
-		@Consumes(MediaType.APPLICATION_JSON)
-		public Response incomingContractHandler(InputStream incomingData) {
-			String contractJson = "";
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response incomingContractHandler(InputStream incomingData) {
+		String contractJson = "";
 
-			try {
-//Receive POST data (RepairContract)				
-				BufferedReader input = new BufferedReader(new InputStreamReader(incomingData));			
-				Gson gson = new Gson();
-				RepairContract newContract = gson.fromJson(input, RepairContract.class);
-				contractJson = gson.toJson(newContract);
-				
-				Map<String,Object> map = new HashMap<String,Object>();
-				map.put("contract", contractJson);
-				LOGGER.info("New RepairContract received: \n" + JsonHandler.printJSON(contractJson));
-//Start camunda process with contract process variable				
-				ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", newContract.getTransactionKey(), map);
-				LOGGER.info("Process startet with ID: " + processInstance.getId());
-				
-			} catch (Exception e) {
-				LOGGER.error("Error Parsing new Contract: - ");
-				e.printStackTrace();
-			}
+		try {
+			// Receive POST data (RepairContract)
+			BufferedReader input = new BufferedReader(new InputStreamReader(incomingData));
+			Gson gson = new Gson();
+			RepairContract newContract = gson.fromJson(input, RepairContract.class);
+			contractJson = gson.toJson(newContract);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("contract", contractJson);
+			System.out.println("////////////////////////////////////////////////////////////////////////////////////////");
+			LOGGER.info("New RepairContract received: \n" + JsonHandler.printJSON(contractJson));
+			// Start camunda process with contract process variable
+			MongoClass.createDatabaseConnection();
+			ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract",
+					newContract.getTransactionKey(), map);
+			LOGGER.info("Process startet with ID: " + processInstance.getId());
 			return Response.status(200).entity(contractJson).build();
+		} catch (Exception e) {
+			LOGGER.error("Error Parsing new Contract: - ");
+			e.printStackTrace();
+			return Response.status(404).entity(contractJson).build();
 		}
+	}
 }
