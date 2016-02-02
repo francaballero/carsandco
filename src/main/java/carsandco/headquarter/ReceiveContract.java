@@ -1,5 +1,6 @@
 package carsandco.headquarter;
 
+import org.apache.log4j.Logger;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
@@ -7,6 +8,7 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 import com.google.gson.Gson;
 
+import carsandco.tools.JsonHandler;
 import de.uniko.digicom.carsandco.messages.RepairContract;
 
 import java.io.BufferedReader;
@@ -19,16 +21,17 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/new")
 public class ReceiveContract {
-
+		private static final Logger LOGGER = Logger.getLogger(ReceiveContract.class);
 		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 		RuntimeService runtimeService = processEngine.getRuntimeService();
 
 		@POST
 		@Consumes(MediaType.APPLICATION_JSON)
-		public void incomingContractHandler(InputStream incomingData) {
+		public Response incomingContractHandler(InputStream incomingData) {
 			String contractJson = "";
 
 			try {
@@ -40,15 +43,15 @@ public class ReceiveContract {
 				
 				Map<String,Object> map = new HashMap<String,Object>();
 				map.put("contract", contractJson);
-				System.out.println("New RepairContract received: \n" + contractJson);
+				LOGGER.info("New RepairContract received: \n" + JsonHandler.printJSON(contractJson));
 //Start camunda process with contract process variable				
 				ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract", newContract.getTransactionKey(), map);
-				System.out.println("Process startet with ID: " + processInstance.getId());
+				LOGGER.info("Process startet with ID: " + processInstance.getId());
 				
 			} catch (Exception e) {
-				System.err.println("Error Parsing new Contract: - ");
+				LOGGER.error("Error Parsing new Contract: - ");
 				e.printStackTrace();
 			}
-			
+			return Response.status(200).entity(contractJson).build();
 		}
 }
