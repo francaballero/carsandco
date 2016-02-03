@@ -4,12 +4,12 @@ public class Station {
 	
 	private String city;
 	private double lat;
-	private double long_;
+	private double lon;
 	
-	public Station (String city, double lat, double long_) {
+	public Station (String city, double lat, double lon) {
 		this.city = city;
 		this.lat = lat;
-		this.long_ = long_;
+		this.lon = lon;
 	}
 	
 	public void setCity (String city) {
@@ -20,8 +20,8 @@ public class Station {
 		this.lat = lat;
 	}
 	
-	public void setLong (double long_) {
-		this.long_ = long_;
+	public void setLong (double lon) {
+		this.lon = lon;
 	}
 	
 	public String getCity() {
@@ -32,8 +32,8 @@ public class Station {
 		return lat;
 	}
 	
-	public double getLong() {
-		return long_;
+	public double getLon() {
+		return lon;
 	}
 
 }
