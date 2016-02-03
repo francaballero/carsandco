@@ -41,5 +41,15 @@ public class WorkList {
 	    		+ "\n Total: " + getTotal() + "€\n"
 	    		+ "********************************************\n\n";
 	  }
+	  
+	  public String sendList(){
+		  StringBuilder builder = new StringBuilder();
+		  builder.append("PERFORMED WORK: ");
+		  for(Item item: items) {
+			 builder.append(item.getName() + ", ");
+		  }
+		  builder.append("TOTAL PRICE: " + this.getTotal());
+		  return builder.toString();
+	  }
 
 }

@@ -46,16 +46,13 @@ public class ReceivePaymentNotification {
 					.setVariable("paymentNotification", paymentNoteJson).correlate();
 			response.setSuccess(true);
 			String returnString = gson.toJson(response);
-			LOGGER.info("RestResponse: " + returnString);
 			return returnString;
 		} catch (Exception e) {
 			LOGGER.error("Error Parsing Payment Notification: - ");
-			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 			response.setSuccess(false);
 			response.setMessage("Error parsing payment notification: " + e.getMessage());	
 			String returnString = gson.toJson(response);
-			LOGGER.info("RestResponse: " + returnString);
 			return returnString;
 		}
 	}

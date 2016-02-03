@@ -34,7 +34,7 @@ public class CreateInvoice implements JavaDelegate {
 			invoice.setIban(IBAN);
 
 			invoice.setAmount(list.getTotal());
-			invoice.setDetailedRepairInformation(worklist);
+			invoice.setDetailedRepairInformation(list.sendList());
 			invoice.setPurpose((String) execution.getVariable("contractID"));
 			// Get debtor name from customerID with database query
 			JSONObject debtor = MongoClass.getJSON("customers", "customerID", contract.getCustomerID());

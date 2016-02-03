@@ -34,12 +34,7 @@ public class SendInvoice implements JavaDelegate {
 			if (customerID.equals(capitol.getString("customerID"))) {
 				Runnable runSendInvoice = new Runnable() {
 					public void run() {
-						try {
-							Thread.sleep(5000);
-						} catch (InterruptedException e) {
-							LOGGER.error("Sleeping before sending invoice failed.");
-							e.printStackTrace();
-						}
+
 						RestResponse response = AccidentApiClient.continueAccident(invoice);
 						if (response.hasSucceeded()) {
 							LOGGER.info("Sending invoice to Capitol successful!");
@@ -55,12 +50,7 @@ public class SendInvoice implements JavaDelegate {
 			if (customerID.equals(bvis.getString("customerID"))) {
 				Runnable runSendInvoice = new Runnable() {
 					public void run() {
-						try {
-							Thread.sleep(5000);
-						} catch (InterruptedException e) {
-							LOGGER.error("Sleeping before sending invoice failed.");
-							e.printStackTrace();
-						}
+				
 						RestResponse response = BvisApiClient.sendInvoiceRequest(invoice);
 						if (response.hasSucceeded()) {
 							LOGGER.info("Sending invoice to BVIS successful!");
@@ -76,7 +66,6 @@ public class SendInvoice implements JavaDelegate {
 			}
 		} catch (Exception e) {
 			LOGGER.error("Error sending the invoice " + invoiceID);
-			MongoClass.closeDatabaseConnection();
 		}
 	}
 
