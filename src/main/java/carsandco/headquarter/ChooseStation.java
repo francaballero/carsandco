@@ -6,6 +6,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import carsandco.tools.GoogleMaps;
 import carsandco.tools.JsonHandler;
+import carsandco.tools.MongoClass;
 import carsandco.tools.Pair;
 import carsandco.tools.Station;
 import de.uniko.digicom.carsandco.messages.RepairContract;
@@ -16,6 +17,7 @@ public class ChooseStation implements JavaDelegate {
 	private static final Logger LOGGER = Logger.getLogger( ChooseStation.class);
 	
 	public void execute(DelegateExecution execution) throws Exception {
+		try{
 		String contractJson = (String) execution.getVariable("contract");
 		RepairContract contract = JsonHandler.toObject(contractJson, RepairContract.class);
 		
@@ -39,7 +41,12 @@ public class ChooseStation implements JavaDelegate {
 		LOGGER.info("The closest station to '" +carLocationCity.getCity() + "' is: '" + station.getValue().getCity() + "'."
 				+ "\nIn a distance of: " + station.getKey()/1000.00 +"km.\n\n"
 				+ googleMapsLink + "/\n\n\n");
-		LOGGER.info("Redirecting contract information to service station...");	
+		LOGGER.info("Redirecting contract information to service station...");
+		}catch(Exception e){
+			LOGGER.error("Could not calculate the closest station.");
+			e.printStackTrace();
+			MongoClass.closeDatabaseConnection();
+		}
 
 	}
 	

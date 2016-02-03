@@ -59,6 +59,7 @@ public class ReceiveContract {
 			return returnString;
 		} catch (Exception e) {
 			LOGGER.error("Error Parsing new Contract: - ");
+			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 			response.setSuccess(false);
 			response.setMessage("Could not parse contract: " + e.getMessage());

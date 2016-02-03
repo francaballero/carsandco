@@ -38,6 +38,7 @@ public class GoogleMaps {
 		if (exception) {
 			System.out.println("Error calculating the closest service station.");
 			System.out.println("Contract handeled by headquarter in Amsterdam.\n");
+			MongoClass.closeDatabaseConnection();
 		}
 
 		// We sort the List by distances
@@ -93,6 +94,7 @@ public class GoogleMaps {
 			return new JSONObject(outputString);
 		} catch (Exception e) {
 			System.out.println("Error in calling to Google API");
+			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 			return null;
 		}

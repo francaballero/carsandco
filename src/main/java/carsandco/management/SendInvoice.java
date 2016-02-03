@@ -65,6 +65,7 @@ public class SendInvoice implements JavaDelegate {
 			}
 		} catch (Exception e) {
 			LOGGER.error("Error sending the invoice " + invoiceID);
+			MongoClass.closeDatabaseConnection();
 		}
 	}
 

@@ -51,6 +51,7 @@ public class CreateInvoice implements JavaDelegate {
 		} catch (Exception e) {
 			LOGGER.error("Error creating a new invoice with transaction key " + contract.getTransactionKey()
 					+ " and debtor " + contract.getCustomerID() + " failed.");
+			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 		}
 	}

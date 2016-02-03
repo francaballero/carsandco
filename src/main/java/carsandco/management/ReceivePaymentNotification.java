@@ -17,6 +17,7 @@ import org.camunda.bpm.engine.RuntimeService;
 import com.google.gson.Gson;
 
 import carsandco.tools.JsonHandler;
+import carsandco.tools.MongoClass;
 import de.uniko.digicom.capitol.api.RestResponse;
 import de.uniko.digicom.carsandco.messages.PaymentNotification;
 
@@ -49,6 +50,7 @@ public class ReceivePaymentNotification {
 			return returnString;
 		} catch (Exception e) {
 			LOGGER.error("Error Parsing Payment Notification: - ");
+			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 			response.setSuccess(false);
 			response.setMessage("Error parsing payment notification: " + e.getMessage());	

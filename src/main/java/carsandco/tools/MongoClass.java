@@ -19,7 +19,7 @@ import com.mongodb.WriteConcern;
 import com.mongodb.util.JSON;
 
 public class MongoClass {
-
+	
 	private static final Logger LOGGER = Logger.getLogger(MongoClass.class);
 	protected static String DB_NAME = "carsandco-database";
 	private static MongoClient mongoClient;
@@ -37,6 +37,7 @@ public class MongoClass {
 			}
 		} catch (Exception e) {
 			LOGGER.error("Error Parsing data into database: - ");
+			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 		}
 
@@ -50,6 +51,7 @@ public class MongoClass {
 			return id.toString();
 		} catch (Exception e) {
 			LOGGER.error("Error adding data into database collection " + collection);
+			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 		}
 		return null;
@@ -70,6 +72,7 @@ public class MongoClass {
 			cursor.close();
 		} catch (Exception e) {
 			LOGGER.error("Error querying database in " + collection + " where " + key + " = " + value);
+			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 		}
 
@@ -85,6 +88,7 @@ public class MongoClass {
 			coll.update(new BasicDBObject("_id", docID), new BasicDBObject("$set", new BasicDBObject(key, value)));
 		} catch (Exception e) {
 			LOGGER.error("Error updating data in database: - ");
+			MongoClass.closeDatabaseConnection();
 		}
 	}
 	
@@ -97,6 +101,7 @@ public class MongoClass {
 	public static void closeDatabaseConnection(){
 		mongoClient.close();
 		LOGGER.info("Database connection closed successfully.");
+		MongoClass.closeDatabaseConnection();
 	}
 
 }
