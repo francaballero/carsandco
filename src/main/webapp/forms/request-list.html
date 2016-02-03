@@ -25,13 +25,7 @@
       camForm.variableManager.createVariable({
         name: 'workList',
         type: 'String',
-        value: angular.toJson(workList)
-       // valueInfo: {
-          // indicate that object is serialized as json
-        //  serializationDataFormat: 'application/json',
-          // provide classname of java object
-        //  objectTypeName: 'carsandco.tools.WorkList'
-      //  }
+        value: angular.toJson($scope.workList)
       });
 
     });
