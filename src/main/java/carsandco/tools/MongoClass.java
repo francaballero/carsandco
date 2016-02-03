@@ -23,13 +23,15 @@ public class MongoClass {
 	private static final Logger LOGGER = Logger.getLogger(MongoClass.class);
 	protected static String DB_NAME = "carsandco-database";
 	private static MongoClient mongoClient;
+	private static DB db;
 	static{try {
 		mongoClient=new MongoClient();
+		db = mongoClient.getDB(DB_NAME);
 	} catch (UnknownHostException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}}
-	private static DB db;
+
 
 	public static String insertJSON(String collection, InputStream incomingData) throws UnknownHostException {
 

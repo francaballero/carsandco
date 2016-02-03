@@ -16,7 +16,8 @@ public class CheckPayment implements JavaDelegate {
 		PaymentNotification paymentNote = JsonHandler.toObject(paymentNoteJson, PaymentNotification.class);
 		String contractID = (String) execution.getVariable("contractID");
 		String invoiceID = (String) execution.getVariable("invoiceID");
-
+		LOGGER.info("paymentNote:" + paymentNoteJson);
+		LOGGER.info("Purpose: " + paymentNote.getPurpose());
 		// Check if payment notification purpose equals current invoice purpose
 		// and update invoice with payed = true or false
 		try {

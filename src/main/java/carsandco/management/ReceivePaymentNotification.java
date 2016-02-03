@@ -43,7 +43,7 @@ public class ReceivePaymentNotification {
 			// Continue camunda execution
 			runtimeService.createMessageCorrelation("payment")
 					.processInstanceBusinessKey(paymentNote.getTransactionKey())
-					.setVariable("paymentNotification", paymentNoteJson).correlate();
+					.setVariable("paymentNote", paymentNoteJson).correlate();
 			response.setSuccess(true);
 			String returnString = gson.toJson(response);
 			return returnString;
