@@ -23,7 +23,7 @@ public class ChooseStation implements JavaDelegate {
 	    String carLocationCityString = JsonHandler.toJson(carLocationCity);
 	    LOGGER.info(carLocationCityString);
 	    
-	    LOGGER.info("The contract shows that the car is in '" + carLocationCity.getCity());
+	    LOGGER.info("The contract shows that the car is in " + carLocationCity.getCity());
 	    LOGGER.info("Calculating the closest 'Cars&Co' station...");
 			
 		Pair<Integer, Station> station = GoogleMaps.getClosestStation(carLocationCity.getCity());

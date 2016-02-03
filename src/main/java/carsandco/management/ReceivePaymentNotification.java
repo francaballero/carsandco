@@ -44,13 +44,17 @@ public class ReceivePaymentNotification {
 					.processInstanceBusinessKey(paymentNote.getTransactionKey())
 					.setVariable("paymentNotification", paymentNoteJson).correlate();
 			response.setSuccess(true);
-			return gson.toJson(response);
+			String returnString = gson.toJson(response);
+			LOGGER.info("RestResponse: " + returnString);
+			return returnString;
 		} catch (Exception e) {
 			LOGGER.error("Error Parsing Payment Notification: - ");
 			e.printStackTrace();
 			response.setSuccess(false);
 			response.setMessage("Error parsing payment notification: " + e.getMessage());	
-			return gson.toJson(response);
+			String returnString = gson.toJson(response);
+			LOGGER.info("RestResponse: " + returnString);
+			return returnString;
 		}
 	}
 }

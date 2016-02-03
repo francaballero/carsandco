@@ -54,13 +54,17 @@ public class ReceiveContract {
 					newContract.getTransactionKey(), map);
 			LOGGER.info("Process startet with ID: " + processInstance.getId());
 			response.setSuccess(true);
-			return gson.toJson(response);
+			String returnString = gson.toJson(response);
+			LOGGER.info("RestResponse: " + returnString);
+			return returnString;
 		} catch (Exception e) {
 			LOGGER.error("Error Parsing new Contract: - ");
 			e.printStackTrace();
 			response.setSuccess(false);
 			response.setMessage("Could not parse contract: " + e.getMessage());
-			return gson.toJson(response);
+			String returnString = gson.toJson(response);
+			LOGGER.info("RestResponse: " + returnString);
+			return returnString;
 		}
 	}
 }
