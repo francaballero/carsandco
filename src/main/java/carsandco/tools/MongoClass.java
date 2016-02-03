@@ -101,7 +101,6 @@ public class MongoClass {
 	public static void closeDatabaseConnection(){
 		mongoClient.close();
 		LOGGER.info("Database connection closed successfully.");
-		MongoClass.closeDatabaseConnection();
 	}
 
 }

@@ -45,9 +45,7 @@ public class SendInvoice implements JavaDelegate {
 				};
 				LOGGER.info("Sending Invoice to Capitol...");
 				new Thread(runSendInvoice).start();
-			}
-			// Case BVIS
-			if (customerID.equals(bvis.getString("customerID"))) {
+			} else 	if (customerID.equals(bvis.getString("customerID"))) { // Case BVIS 
 				Runnable runSendInvoice = new Runnable() {
 					public void run() {
 				
