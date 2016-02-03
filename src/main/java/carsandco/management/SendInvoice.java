@@ -34,8 +34,7 @@ public class SendInvoice implements JavaDelegate {
 			if (customerID.equals(capitol.getString("customerID"))) {
 				Runnable runSendInvoice = new Runnable() {
 					public void run() {
-						AccidentApiClient capitol_api = new AccidentApiClient();
-						RestResponse response = capitol_api.continueAccident(invoice);
+						RestResponse response = AccidentApiClient.continueAccident(invoice);
 						if (response.hasSucceeded()) {
 							LOGGER.info("Sending invoice to Capitol successful!");
 						} else {

@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 
 import carsandco.tools.JsonHandler;
 import carsandco.tools.MongoClass;
+import de.uniko.digicom.capitol.api.RestResponse;
 import de.uniko.digicom.carsandco.messages.RepairContract;
 
 import java.io.BufferedReader;
@@ -22,7 +23,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Path("/new")
 public class ReceiveContract {
@@ -33,13 +33,14 @@ public class ReceiveContract {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response incomingContractHandler(InputStream incomingData) {
+	public String incomingContractHandler(InputStream incomingData) {
 		String contractJson = "";
-
+		RestResponse response = new RestResponse();
+		Gson gson = new Gson();
 		try {
 			// Receive POST data (RepairContract)
 			BufferedReader input = new BufferedReader(new InputStreamReader(incomingData));
-			Gson gson = new Gson();
+			
 			RepairContract newContract = gson.fromJson(input, RepairContract.class);
 			contractJson = gson.toJson(newContract);
 
@@ -52,11 +53,14 @@ public class ReceiveContract {
 			ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract",
 					newContract.getTransactionKey(), map);
 			LOGGER.info("Process startet with ID: " + processInstance.getId());
-			return Response.status(200).entity(contractJson).build();
+			response.setSuccess(true);
+			return gson.toJson(response);
 		} catch (Exception e) {
 			LOGGER.error("Error Parsing new Contract: - ");
 			e.printStackTrace();
-			return Response.status(404).entity(contractJson).build();
+			response.setSuccess(false);
+			response.setMessage("Could not parse contract: " + e.getMessage());
+			return gson.toJson(response);
 		}
 	}
 }
