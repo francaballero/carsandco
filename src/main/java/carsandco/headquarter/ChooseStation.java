@@ -1,11 +1,8 @@
 package carsandco.headquarter;
 
-import java.net.UnknownHostException;
-
 import org.apache.log4j.Logger;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.json.JSONException;
 
 import carsandco.tools.GoogleMaps;
 import carsandco.tools.JsonHandler;

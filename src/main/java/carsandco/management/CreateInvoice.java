@@ -31,6 +31,7 @@ public class CreateInvoice implements JavaDelegate {
 			InvoiceRequest invoice = new InvoiceRequest(contract.getTransactionKey());
 			invoice.setBic(BIC);
 			invoice.setIban(IBAN);
+
 			invoice.setAmount(list.getTotal());
 			invoice.setDetailedRepairInformation(list.toString());
 			invoice.setPurpose((String) execution.getVariable("contractID"));

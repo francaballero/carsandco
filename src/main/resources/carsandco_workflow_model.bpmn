@@ -65,7 +65,7 @@
     <dataObject id="sid-474eba02-00dc-4b24-8163-bbacd1e57451" name="List of performed work" />
     <dataObject id="sid-ad7baaac-ea51-4fbb-946d-33aaa184670f" name="Invoice" />
     <dataObject id="sid-56df2c42-dc85-4823-b0dc-857d9cd67654" name="Payment Notification" />
-    <userTask id="ConfirmContractUserTask" name="Check contract information" implementation="##unspecified" camunda:formKey="embedded:app:forms/confirm-contract.html" camunda:candidateGroups="Management">
+    <userTask id="ConfirmContractUserTask" name="Check contract information" implementation="##unspecified" camunda:formKey="embedded:app:forms/confirm-contract.html" camunda:assignee="Manager" camunda:candidateGroups="Management">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
         <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
@@ -182,7 +182,7 @@
       <incoming>sid-CD3CF0DA-7337-4D87-B61E-8D351F6FC70D</incoming>
       <outgoing>SequenceFlow_0dcnyf8</outgoing>
     </manualTask>
-    <userTask id="CreateWorklist" name="Create list of performed work" implementation="##unspecified" camunda:formKey="embedded:app:forms/request-list.html" camunda:candidateGroups="Mechanics">
+    <userTask id="CreateWorklist" name="Create list of performed work" implementation="##unspecified" camunda:formKey="embedded:app:forms/request-list.html" camunda:assignee="Mechanic" camunda:candidateGroups="Mechanics">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
         <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
