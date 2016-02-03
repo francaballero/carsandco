@@ -42,13 +42,13 @@ public class CreateInvoice implements JavaDelegate {
 			// Set process variable
 			String invoiceJson = JsonHandler.toJson(invoice);
 			execution.setVariable("invoice", invoiceJson);
+			LOGGER.info("Invoice successfully created: \n" + JsonHandler.printJSON(invoiceJson));
 			// Save invoice to database
 			InputStream invoiceInput = new ByteArrayInputStream(invoiceJson.getBytes("UTF-8"));
 			String invoiceID = MongoClass.insertJSON("invoices", invoiceInput);
 			execution.setVariable("invoiceID", invoiceID);
 
-			LOGGER.info("Invoice successfully created and saved in database with ID: " + invoiceID + "\n"
-					+ JsonHandler.printJSON(invoiceJson));
+			LOGGER.info("Invoice successfully and saved in database with ID: " + invoiceID + "\n");
 		} catch (Exception e) {
 			LOGGER.error("Error creating a new invoice with transaction key " + contract.getTransactionKey()
 					+ " and debtor " + contract.getCustomerID() + " failed.");
