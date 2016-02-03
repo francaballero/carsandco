@@ -16,7 +16,6 @@ public class JsonHandler {
     		return new Gson().toJson(object);
     	}catch(Exception e){
     		LOGGER.error("Error parsing object from type " + object.getClass().getName() + " to JSON String.");
-    		MongoClass.closeDatabaseConnection();
     		e.printStackTrace();
     		return null;
     	}
@@ -28,7 +27,6 @@ public class JsonHandler {
     		 return new Gson().fromJson(jsonString, targetClass);
     	}catch(Exception e){
     		LOGGER.error("Error parsing JSON String to " + targetClass.getName() + " object.");
-    		MongoClass.closeDatabaseConnection();
     		e.printStackTrace();
     		return null;
     	}
@@ -42,7 +40,6 @@ public class JsonHandler {
     	return gson.toJson(niceJson);
     	} catch(Exception e){
     		LOGGER.error("Error creating readable JSON String.");
-    		MongoClass.closeDatabaseConnection();
     		e.printStackTrace();
     		return null;
     	}

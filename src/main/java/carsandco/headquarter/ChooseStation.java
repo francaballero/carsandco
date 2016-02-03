@@ -45,7 +45,6 @@ public class ChooseStation implements JavaDelegate {
 		}catch(Exception e){
 			LOGGER.error("Could not calculate the closest station.");
 			e.printStackTrace();
-			MongoClass.closeDatabaseConnection();
 		}
 
 	}

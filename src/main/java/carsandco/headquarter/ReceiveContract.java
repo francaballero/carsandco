@@ -49,7 +49,6 @@ public class ReceiveContract {
 			System.out.println("////////////////////////////////////////////////////////////////////////////////////////");
 			LOGGER.info("New RepairContract received: \n" + JsonHandler.printJSON(contractJson));
 			// Start camunda process with contract process variable
-			MongoClass.createDatabaseConnection();
 			ProcessInstance processInstance = runtimeService.startProcessInstanceByMessage("contract",
 					newContract.getTransactionKey(), map);
 			LOGGER.info("Process startet with ID: " + processInstance.getId());

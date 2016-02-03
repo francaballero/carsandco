@@ -34,8 +34,8 @@ public class CheckPayment implements JavaDelegate {
 			}
 		} catch (Exception e) {
 			LOGGER.error("Error checking payment notification.");
+			e.printStackTrace();
 		}
-		MongoClass.closeDatabaseConnection();
 	}
 
 }
