@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -42,17 +42,7 @@ public class GoogleMaps {
 		}
 
 		// We sort the List by distances
-		distances.sort(new Comparator<Pair<Integer, Station>>() {
-			public int compare(Pair<Integer, Station> o1, Pair<Integer, Station> o2) {
-				if (o1.getKey() < o2.getKey()) {
-					return -1;
-				} else if (o1.getValue().equals(o2.getValue())) {
-					return 0;
-				} else {
-					return 1;
-				}
-			}
-		});
+		Collections.sort(distances, new CustomComparator());
 
 		// And we return the name of the closest station
 		return distances.get(0);

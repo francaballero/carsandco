@@ -24,7 +24,8 @@ public class CreateInvoice implements JavaDelegate {
 
 		String contractJson = (String) execution.getVariable("contract");
 		RepairContract contract = JsonHandler.toObject(contractJson, RepairContract.class);
-		WorkList list = (WorkList) execution.getVariable("workList");
+		String worklist = (String) execution.getVariable("workList");
+		WorkList list = JsonHandler.toObject(worklist, WorkList.class);
 		try {
 			LOGGER.info("Creating invoice...");
 			// Create InvoiceRequest and fill data
@@ -51,7 +52,6 @@ public class CreateInvoice implements JavaDelegate {
 		} catch (Exception e) {
 			LOGGER.error("Error creating a new invoice with transaction key " + contract.getTransactionKey()
 					+ " and debtor " + contract.getCustomerID() + " failed.");
-			MongoClass.closeDatabaseConnection();
 			e.printStackTrace();
 		}
 	}
