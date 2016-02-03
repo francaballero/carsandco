@@ -17,31 +17,31 @@ import org.json.JSONObject;
 public class GoogleMaps {
 	
 	//This function return the closest Cars&Co station from a origin city and the distance.
-	public static Pair<Integer, String> getClosestStation(String origin) throws UnknownHostException, JSONException {
-		List<String> stations = getStations();
-		List<Pair<Integer,String>> distances = new ArrayList<Pair<Integer,String>>();
+	public static Pair<Integer, Station> getClosestStation(String origin) throws Exception {
+		List<Station> stations = getStations();
+		List<Pair<Integer,Station>> distances = new ArrayList<Pair<Integer,Station>>();
 		int distance;
 		boolean exception = false;
 		
 		//We calculate the distances from the origin to all the stations 
-		for (String station : stations) {
+		for (Station station : stations) {
 			try {
-				distance = getDistance(origin, station);
+				distance = getDistance(origin, station.getCity());
 			} catch (Exception e) {
 				distance = Integer.MAX_VALUE;
 				exception = true;
 			}
-			distances.add(new Pair<Integer, String>(distance, station));
+			distances.add(new Pair<Integer, Station>(distance, station));
 		}
 		
 		if (exception) {
-			System.err.println("Error calculating the closest service station.");
+			System.out.println("Error calculating the closest service station.");
 	    	System.out.println("Contract handeled by headquarter in Amsterdam.\n");
 		}
 		
 		//We sort the List by distances
-		distances.sort(new Comparator<Pair<Integer, String>>() {
-	        public int compare(Pair<Integer, String> o1, Pair<Integer, String> o2) {
+		distances.sort(new Comparator<Pair<Integer, Station>>() {
+	        public int compare(Pair<Integer, Station> o1, Pair<Integer, Station> o2) {
 	            if (o1.getKey() < o2.getKey()) {
 	                return -1;
 	            } else if (o1.getValue().equals(o2.getValue())) {
@@ -57,14 +57,20 @@ public class GoogleMaps {
 	}
 	
 	//This function returns a List with all the stations loaded from the DB.
-	private static List<String> getStations() throws UnknownHostException, JSONException {
+	private static List<Station> getStations() throws UnknownHostException, JSONException {
 		JSONObject stationsJsonObject = MongoClass.getJSON("stations", "id", "1");
+		
 		JSONArray stationsJsonArray = stationsJsonObject.getJSONArray("stations");
-				
-		List<String> stationsArray = new ArrayList<String>();
-				
+		
+		List<Station> stationsArray = new ArrayList<Station>();
+		String city;
+		double lat, lon;
+			
 		for(int i = 0; i < stationsJsonArray.length(); i++) {
-			stationsArray.add(stationsJsonArray.getString(i));
+			city = (String) stationsJsonArray.getJSONObject(i).getString("city");
+			lat = (double) stationsJsonArray.getJSONObject(i).getDouble("lat");
+			lon = (double) stationsJsonArray.getJSONObject(i).getDouble("long");
+			stationsArray.add(new Station(city, lat, lon));
 		}
 				
 		return stationsArray;
