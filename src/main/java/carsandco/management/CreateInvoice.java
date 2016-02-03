@@ -34,7 +34,7 @@ public class CreateInvoice implements JavaDelegate {
 			invoice.setIban(IBAN);
 
 			invoice.setAmount(list.getTotal());
-			invoice.setDetailedRepairInformation(list.toString());
+			invoice.setDetailedRepairInformation(worklist);
 			invoice.setPurpose((String) execution.getVariable("contractID"));
 			// Get debtor name from customerID with database query
 			JSONObject debtor = MongoClass.getJSON("customers", "customerID", contract.getCustomerID());
@@ -42,7 +42,7 @@ public class CreateInvoice implements JavaDelegate {
 			// Set process variable
 			String invoiceJson = JsonHandler.toJson(invoice);
 			execution.setVariable("invoice", invoiceJson);
-			LOGGER.info("Invoice successfully created: \n" + JsonHandler.printJSON(invoiceJson));
+			LOGGER.info("Invoice successfully created: \n" + invoiceJson);
 			// Save invoice to database
 			InputStream invoiceInput = new ByteArrayInputStream(invoiceJson.getBytes("UTF-8"));
 			String invoiceID = MongoClass.insertJSON("invoices", invoiceInput);

@@ -25,7 +25,7 @@
       camForm.variableManager.createVariable({
         name: 'workList',
         type: 'String',
-        value: angular.toJson($scope.workList)
+        value: angular.fromJson($scope.workList)
       });
 
     });
